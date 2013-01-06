@@ -1,4 +1,12 @@
-twitternovelle
-==============
+# Simple Twitter Streaming Novel
 
-html5 websocket twitter stream
+    A small webapp to stream live twitter feed
+    
+## Installation
+
+Based on sinatra and eventmachine, uses twitterstream gem
+
+    bundle
+    rackup
+    
+    

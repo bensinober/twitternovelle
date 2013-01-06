@@ -1,0 +1,19 @@
+javascript:
+  // Initialize
+  var ws = new WebSocket("ws://localhost:4567/ws");
+  var request;
+
+  // websocket message
+  ws.onmessage = function(evt) {
+    console.log("Message received: "+evt.data);
+    alert(evt.data);
+  }
+
+  ws.onclose = function() {
+    console.log("Websocket connection lost!");
+  }
+
+  ws.onopen = function() {
+    console.log("Websocket connected!");
+  }
+
