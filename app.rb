@@ -6,10 +6,22 @@ require "sinatra-websocket"
 require "sinatra/reloader" if development?
 require "slim"
 require "json"
+#require "yajl"
 require "logger"
 require "tweetstream"
 
 class APP < Sinatra::Base
+  
+  CONFIG = YAML::load(File.open("config/config.yml"))
+  # Twitter API config
+  TweetStream.configure do |config|
+    config.consumer_key       = CONFIG['consumer_key']
+    config.consumer_secret    = CONFIG['consumer_secret']
+    config.oauth_token        = CONFIG['oauth_token']
+    config.oauth_token_secret = CONFIG['oauth_token_secret']
+    config.auth_method        = CONFIG['auth_method']
+    config.parser             = CONFIG['parser']
+  end
   
   # Sinatra configs
   session = {}
@@ -18,14 +30,14 @@ class APP < Sinatra::Base
   
   # Routing
   get '/' do
-    session[:history] = []
-    # Nysgjerrig på boka?
-    logger.info("Sesjon - -")
-    slim(:index)
+    @client = TweetStream::Client.new
+     @client.userstream do |res|
+       @res = res
+     end
+    slim :index, locales => { :status => status }
   end
   
   get '/ws' do
-    # handles the messages from the RFID-reader
     return false unless request.websocket?
   
     request.websocket do |ws|

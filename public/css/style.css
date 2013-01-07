@@ -1,4 +1,4 @@
-*                  { margin:0; padding:0; border:0; cursor: none; }
+*                  { margin:0; padding:0; border:0; }
 .select-disable     { -khtml-user-select: none; -moz-user-select: none;
                     -o-user-select: none;  user-select: none; }
 button::-moz-focus-inner { border: 0; }
@@ -10,54 +10,21 @@ a:link             { text-decoration: none; color: #444;}
 a:visited          { color: #444;}
 a:active, a:focus  { outline-style: none; outline: 0; }
 
-img#frontarrow    { position:fixed; left:900px; top:650px;}
-img#frontbook     { position:fixed; left:1280px; top: 400px;}
 div#overlay        { position: fixed; width:100%; height: 100%; top:0; left: 0;
                      z-index: 50; background: #000; opacity: 0.8; display:none;}
-div#vi-leter       { color: #fff; position:fixed; display:none;
-                     top: 470px; left:0px; z-index:1000; width:1680px; text-align:center;}
-#vi-leter p        { font-size:3em; }
-div#avbryt         { z-index: 1000; position: fixed; top: 570px; left: 720px;}
-
-div#barcode_search { text-align: center; padding: 20px;}
-#loading       { width:60px; display:inline-block; text-align:left;}
-input.barcode_field  { border:1px solid gray; margin-top:150px; padding: 10px; text-align: center; font-style: italic; color:#666;}
-
-div#omtale-bilde   { display: block; width: 255px; height: 380px; background:#eee; padding:20px;}
 div#inner-border   { padding: 20px; border:2px solid gray; background: #eee; height:338px; text-align: center;}
-div.book-title     { color:#333; font-family: Times; font-size: 2.3em; margin-bottom: 60px; font-style: italic;}
-div.book-author    { color:#333; font-family: Arial; font-size: 1.5em; margin: 20px;}
-
-div.no-review      { padding:1em; font-size: 1.5em;}
-div.no-review p    { line-height: 1.2em;}
-div.no-review li   { margin-left: 1em; padding: 0.2em;}
-
-div.review         { font-size: 1.2em;}
-div.review p       { margin-bottom: 1em;}
 
 div#debug          { background-color:yellow; border: 1px solid black; border-radius: 2px;}
-div#container      { width: 1680px; height:910px; color: #222; }
-div#nysgjerrig     { width:100%; height: 100%; vertical-align: middle}
-div#nysgjerrig-tittel { margin-top:100px; font-size: 6em; font-weight: bold; text-align: center}
-div#nysgjerrig-undertittel { margin:200px;font-size: 4em; text-align: center}
+div#container      { width: 100%; color: #222; }
 
 div#header         { height: 130px; width: 100%; background: #e65740; }
-div#top-buttons    { float: right; margin: 24px;}
-div#leftmenu       { float: left; width: 235px; height: 100%; }
 div#contents       { padding-left: 25px; padding-top: 35px;
                      float: left; background-color: #fff; width: 1400px; overflow:hidden;}
-div#content-left   { width: 300px; background-color: #ddd;
+div#content-left   { width: 20%; background-color: #ddd;
                      border-radius: 5px; float: left; padding: 30px; color:#444;}
-div#content-right  { float: right; width:970px; height: 822px; padding: 20px;
+div#content-right  { float: right; width:70%; padding: 30px;
                      background-color: #ddd; border-radius: 5px;}
-
 img.logo           { float:left; margin-left:20px; margin-top: 30px; height: 60px; }
-button.top-button  { border-radius: 5px; height: 80px; width: 240px;
-                     margin-left: 24px; font-size: 1.2em; color: #444;
-                     box-shadow: 6px 6px 7px 2px rgba(0,0,0,0.15);
-                     background: -moz-linear-gradient(top,  #eee,  #b5b5b5);}
-.top-button:active { position:relative; top: 3px; }
-
 
 div.arrow          { border-color: transparent transparent transparent gray;
                      border-style: solid; border-width:16px; height:0; width: 0;
@@ -81,54 +48,11 @@ div.left-button-s   { position: relative; padding-top: 10px; display: block; wid
                      border-bottom: 1px solid gray; text-align: center; font-size: 24px;
                      box-shadow: 1px  10px 20px 5px rgba(0,0,0,0.18);
                      background: -moz-linear-gradient(left, #aaa, #eee);}
-div.grayed          { color:#999;}
-img.menu-icon        { width:100px; margin-top:50px;}
-div.circle-gray     { display:inline-block; width: 45px; height: 38px; border-radius:30px;
-                     background-color: #666; padding: 8px 2px 0 1px; margin-bottom:5px; color:#ccc;}
-div.circle-red     { display:inline-block; width: 45px; height: 38px; border-radius:30px;
-                     background-color: #e65740; padding: 8px 2px 0 1px; margin-bottom:5px;}
-
-
-div#omtale-tittel  { }
-div#omtale-wrapper { width: 870px; overflow:hidden;}
-div#omtale-tekst   { border:10px solid white; background-color: #fff; height: 555px; width: 836px;
-                     padding: 20px 20px 20px 20px; font-size: 1.3em; float:left; overflow: auto;}
-div#omtale-kilder  { margin-top:20px; height:80px; }
-div#omtale-scroll  { float: right; margin-right:20px; }
-
-#scrollable        { position:relative; overflow:hidden; height: 575px; }
-
 .disabled          { visibility: hidden;}
-img.omtalt-bok     { width: 280px; border: 10px solid white;}
-img.rating         { margin-top: 20px; margin-bottom: 10px;}
-img.scroll-icon    { width: 60px;}
 
-button.kilde       { float:left; width: 220px; height: 80px; font-size: 1.2em;
-                     border-left: 1px solid gray; border-top: 1px solid gray;
-                     border-bottom: 1px solid gray; box-shadow: 1px  2px 30px 10px rgba(0,0,0,0.1);}
-.kilde-mid         { }
-.kilde-left        { border-radius: 5px 0 0 5px; }
-.kilde-right       { border-radius: 0 5px 5px 0; border-right: 1px solid gray; }
-.kilde-valgt       { color: #fff; font-weight: bold;
-                     background: -moz-linear-gradient(top,  #444,  #ccc); }
-.kilde-uvalgt      { background: -moz-linear-gradient(top,  #eee,  #b5b5b5); }
-.kilde-uvalgt:active { background: -moz-linear-gradient(top,  #444,  #ccc) }
-.kilde-uvalgt:active span { position:relative; top: 3px;}
-.kilde-inaktiv     { background-color: #ccc; color: gray;}
-
-div#omtale-bilde-liste   { display: block; height: 260px; width: 220px; background:#eee; padding:20px;}
-div#inner-border-liste   { padding: 10px; border:2px solid gray; background: #eee; height: 230px ; width: 160px; text-align: center;}
-div.book-title-liste     { color:#333; font-family: Times; font-size: 1.3em; margin-bottom: 60px; font-style: italic;}
-div.book-author-liste    { color:#333; font-family: Arial; font-size: 0.9em; margin: 20px;}
-
-div#liste-wrapper { overflow:auto; width:1430px; height: 882px;}
-div.liste-bilde    { height:300px; width: 240px; margin: auto; overflow:hidden;
-                     padding: 0; border:0px solid white; }
 ul.listevisning    { list-style-type: none }
 ul.listevisning li { display: inline-block; width: 260px; height: 450px;
                      background-color: #ccc; margin: 0 50px 50px 0; padding: 20px;
                      border-radius: 5px; box-shadow: 1px  2px 20px 5px rgba(0,0,0,0.1);
                      text-align: center; overflow:hidden;}
 img.listevisning   { height: 300px;}
-p.liste-forfatter  { text-align: left; font-size:18px; font-weight: bold; margin-bottom: 5px; margin-left: 20px;}
-p.liste-tittel     { text-align: left; font-size:18px; margin-left:20px;}
