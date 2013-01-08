@@ -5,17 +5,13 @@ div id="container"
     
     div id="content-right"
       h1 tweets
-      /- tweets.each do | tweet
-        // userstream
-        p #{tweet.id}
-        p #{tweet.name}
-        p #{tweet.screen_name}
-        p #{tweet.location}
-        img src=(tweet.user[:profile_image_url])
-        p #{tweet.text}
-
+      div 
+      table id="tweet_table"
+        tbody
+          tr
+  
     div id="content-left"
-          h1 tweeternovelle
+          h1 twitternovelle
           
           p sjekk ut en tweetstrøm og se den oppdatere seg automatisk via html5 websockets    
 == render :slim, :'websocket'

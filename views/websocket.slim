@@ -1,12 +1,27 @@
 javascript:
   // Initialize
-  var ws = new WebSocket("ws://localhost:4567/ws");
+  var ws = new WebSocket("ws://localhost:4000/ws");
   var request;
 
-  // websocket message
+  // websocket message, received from TweetStream::Client
   ws.onmessage = function(evt) {
     console.log("Message received: "+evt.data);
-    alert(evt.data);
+    //alert(evt.data);
+    var tweet = JSON.parse(evt.data);
+    // make div scrollable if extend height
+    var div = $('#content-right'),
+    height = div.height();
+    
+    $('#tweet_table tbody').append('<tr><td><img src="'+tweet.user["profile_image_url"]+'"/></td>')
+      .append('<td>'+tweet.user["screen_name"]+'</td>')
+      .append('<td>'+tweet.user["name"]+'</td>')
+      .append('<td>'+tweet.user["location"]+'</td>')
+      .append('<td>'+tweet.text+'</td></tr>');
+      
+    div.animate({scrollTop: height}, 500);
+    height += div.height();
+
+    //console.log($('<div></div>').append(proto.clone()).html());
   }
 
   ws.onclose = function() {

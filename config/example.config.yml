@@ -1,8 +1,13 @@
 # get these through Twitter Developer's API
 # https://dev.twitter.com/apps/
-consumer_key:       'aaa'
-consumer_secret:    'aaasecret'
-oauth_token:        'bbb'
-oauth_token_secret: 'bbbsecret'
-auth_method:        :oauth
-parser:             :json
+twitter:
+  consumer_key:       'aaa'
+  consumer_secret:    'aaasecret'
+  oauth_token:        'bbb'
+  oauth_token_secret: 'bbbsecret'
+  auth_method:        :oauth
+  parser:             :json
+
+websocket:
+  host: localhost
+  port: 4000
