@@ -7,6 +7,7 @@ require "sinatra/reloader"
 require "em-http-request"
 require "slim"
 require "yajl"
+require "yajl/json_gem"
 require "logger"
 require "tweetstream"
 
