@@ -1,9 +1,9 @@
 #encoding: UTF-8
 require "rubygems"
 require "bundler/setup"
-require "sinatra"
+require "sinatra/base"
 require "sinatra-websocket"
-require "sinatra/reloader" if development?
+require "sinatra/reloader"
 require "em-http-request"
 require "slim"
 require "json"
@@ -11,9 +11,15 @@ require "logger"
 require "tweetstream"
 
 class APP < Sinatra::Base
+  before do 
+    # Strip the last / from the path
+    request.env['PATH_INFO'].gsub!(/\/$/, '')
+  end
+  
   configure :production, :development do
    enable :logging
   end
+  
   CONFIG = YAML::load(File.open("config/config.yml"))
     
   # Twitter API config
