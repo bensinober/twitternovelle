@@ -11,10 +11,14 @@ require "logger"
 require "tweetstream"
 
 class APP < Sinatra::Base
-  before do 
-    # Strip the last / from the path
-    request.env['PATH_INFO'].gsub!(/\/$/, '')
-  end
+
+  # Sinatra configs
+  set :static, true
+  set :root, File.dirname(__FILE__)
+  session = {}
+  set :server, 'thin'
+  set :sockets, []
+
   
   configure :production, :development do
    enable :logging
@@ -32,11 +36,7 @@ class APP < Sinatra::Base
     config.parser             = CONFIG['twitter']['parser']
   end
   
-  # Sinatra configs
-  session = {}
-  set :server, 'thin'
-  set :sockets, []
-  
+  # to be used later for logging
   session[:tweets] = []
 
   # class methods  
