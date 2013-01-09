@@ -1,8 +1,9 @@
-require File.expand_path(File.dirname(__FILE__) + "/app")
-log = File.new("logs/development.log", "a+") 
-$stdout.reopen(log)
-$stderr.reopen(log)
+require 'rubygems'
+require 'sinatra'
 
-$stderr.sync = true
-$stdout.sync = true
+set :environment, :production
+set :app_file,     'app.rb'
+disable :run
+
+require File.join(File.dirname(__FILE__), 'app')
 run APP
