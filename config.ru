@@ -1,6 +1,3 @@
-require 'bundler/setup'
-Bundler.require(:default)
-
 require File.expand_path(File.dirname(__FILE__) + "/app")
 
 log = File.new("logs/development.log", "a+") 
@@ -9,4 +6,6 @@ $stderr.reopen(log)
 
 $stderr.sync = true
 $stdout.sync = true
+use Rack::ShowExceptions
+
 run APP
