@@ -6,6 +6,7 @@ gem "sinatra"
 gem "sinatra-websocket"
 gem "sinatra-contrib"
 gem "slim"
+gem "yajl-ruby"
 gem "capistrano"
 gem "rvm-capistrano"
 group :development do

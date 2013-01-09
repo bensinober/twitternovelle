@@ -6,7 +6,7 @@ require "sinatra-websocket"
 require "sinatra/reloader"
 require "em-http-request"
 require "slim"
-require "json"
+require "yajl"
 require "logger"
 require "tweetstream"
 
