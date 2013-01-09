@@ -1,9 +1,12 @@
-require 'rubygems'
-require 'sinatra'
+require 'bundler/setup'
+Bundler.require(:default)
 
-set :environment, :production
-set :app_file,     'app.rb'
-disable :run
+require File.expand_path(File.dirname(__FILE__) + "/app")
 
-require File.join(File.dirname(__FILE__), 'app')
+log = File.new("logs/development.log", "a+") 
+$stdout.reopen(log)
+$stderr.reopen(log)
+
+$stderr.sync = true
+$stdout.sync = true
 run APP
