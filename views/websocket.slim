@@ -1,7 +1,7 @@
 javascript:
   // Initialize
   var ws = new WebSocket("ws://localhost:4000/ws");
-  var request;
+  //var request;
 
   // websocket message, received from TweetStream::Client
   ws.onmessage = function(evt) {
@@ -17,7 +17,8 @@ javascript:
       .append('<td>'+tweet.user["name"]+'</td>')
       .append('<td>'+tweet.user["location"]+'</td>')
       .append('<td>'+tweet.text+'</td></tr>');
-      
+    
+    // autoscroll if tweets extend page  
     div.animate({scrollTop: height}, 500);
     height += div.height();
 

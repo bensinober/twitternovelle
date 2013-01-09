@@ -1,3 +1,5 @@
 Gemfile.lock
+Capfile
 logs/*
 config/config.yml
+config/deploy.rb

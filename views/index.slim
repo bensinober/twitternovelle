@@ -12,6 +12,30 @@ div id="container"
   
     div id="content-left"
           h1 twitternovelle
+          p sjekk ut en tweetstrøm og se den oppdatere seg automatisk via html5 websockets
+          br
+          button[type="button" id="tweet_start" class="gen" style="display:none;"] = "kjør strøm"
+          button[type="button" id="tweet_stop" class="gen"]  = "stopp strøm" 
           
-          p sjekk ut en tweetstrøm og se den oppdatere seg automatisk via html5 websockets    
-== render :slim, :'websocket'
+  javascript:
+    $(document).ready(function () {
+      $('button#tweet_start').on('click', function() {
+        var request = $.ajax({
+          url: '/',
+          type: 'GET',
+          cache: false
+        });
+        $('button#tweet_stop').show();
+        $('button#tweet_start').hide();
+      });
+      $('button#tweet_stop').on('click', function() {
+        var request = $.ajax({
+          url: '/stop',
+          type: 'PUT'
+        });
+        $('button#tweet_stop').hide();
+        $('button#tweet_start').show();
+        
+      });  
+    });             
+  == render :slim, :'websocket'

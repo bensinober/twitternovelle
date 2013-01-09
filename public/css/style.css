@@ -22,8 +22,16 @@ div#contents       { padding-left: 25px; padding-top: 35px;
                      float: left; background-color: #fff; width: 1400px; overflow:hidden;}
 div#content-left   { width: 20%; background-color: #ddd;
                      border-radius: 5px; float: left; padding: 30px; color:#444;}
-div#content-right  { float: right; overflow:scroll; width:70%; padding: 30px; height:600px; overflow:auto;
+div#content-right  { float: right; overflow:hidden; width:70%; padding: 30px; height:600px; 
                      background-color: #ddd; border-radius: 5px;}
+table#tweet_table  { border-spacing:10px; }  
+button             { background-color: #e8e8e8; border: 1px solid #888; border-radius: 2px;
+                    padding: 3px; color: #160b57; font-size: 12px; font-family: monospace;
+                    min-width: 22px;}
+button:disabled    { border: 1px dashed #ccc; color: #aaa;}
+button:disabled:active { background: #e8e8e8; position:static;}
+button:active      { background:#ddd; position:relative; top: 1px; }
+button.gen         { margin-right:10px;}                    
 img.logo           { float:left; margin-left:20px; margin-top: 30px; height: 60px; }
 
 div.arrow          { border-color: transparent transparent transparent gray;
