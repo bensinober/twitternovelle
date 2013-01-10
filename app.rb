@@ -1,4 +1,6 @@
 #encoding: UTF-8
+$stdout.sync = true # gives foreman full stdout
+
 require "rubygems"
 require "bundler/setup"
 require "sinatra/base"
@@ -23,7 +25,7 @@ class Twitternovelle < Sinatra::Base
   configure :production, :development do
    enable :logging
   end
-  
+ 
   CONFIG = YAML::load(File.open("config/config.yml"))
     
   # Twitter API config
@@ -46,7 +48,8 @@ class Twitternovelle < Sinatra::Base
       @client = TweetStream::Client.new unless @client
       @client.on_error {|error| logger.error("error: #{error.text}") }
       @client.on_direct_message {|direct_message| logger.info("direct message: #{direct_message.text}") }
-      @client.on_timeline_status {|status| logger.info("timelinestatus: #{status.text}") }
+      #@client.on_timeline_status {|status| logger.info("timelinestatus: #{status.text}") }
+      # start userstream
       @client.userstream {|status| EM.next_tick { settings.sockets.each { |s| s.send(status.to_hash.to_json) } } }
     else
       @client.stop if @client
@@ -55,10 +58,31 @@ class Twitternovelle < Sinatra::Base
   
   # Routing
   get '/' do
-    # start tweetstream
-    stream(run=true)
-    "starta strøm"
-    slim :index, :locals => {:websocket => CONFIG['websocket']}
+    if !request.websocket?
+      slim :index, :locals => {:websocket => CONFIG['websocket']}
+    else
+      # start tweetstream
+      stream(run=true)
+      request.websocket do |ws|
+    
+        ws.onopen do
+          #ws.send("Hello World!")
+          settings.sockets << ws
+          logger.info "connected from: #{ws.request['origin']}"
+        end
+    
+        ws.onmessage do |msg|
+          logger.info "Broadcasting Tweet #{msg} -"
+          EM.next_tick { settings.sockets.each{|s| s.send(msg) } }
+        end
+    
+        ws.onclose do
+          #warn("websocket closed")
+          settings.sockets.delete(ws)
+          logger.info "disconnected from: #{ws.request['origin']}"
+        end
+      end
+    end
   end
 
   put '/stop' do
@@ -75,16 +99,18 @@ class Twitternovelle < Sinatra::Base
       ws.onopen do
         #ws.send("Hello World!")
         settings.sockets << ws
+        logger.info "connected from: #{ws.request['origin']}"
       end
   
       ws.onmessage do |msg|
-        logger.info("Tweet #{msg} -")
+        logger.info "Broadcasting Tweet #{msg} -"
         EM.next_tick { settings.sockets.each{|s| s.send(msg) } }
       end
   
       ws.onclose do
         #warn("websocket closed")
         settings.sockets.delete(ws)
+        logger.info "disconnected from: #{ws.request['origin']}"
       end
     end
   end
