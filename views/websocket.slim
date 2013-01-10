@@ -1,11 +1,12 @@
 javascript:
   // Initialize
   //var ws = new WebSocket("ws://#{websocket['host']}:#{websocket['port']}/ws");
-  var ws = new WebSocket("ws://"+ window.location.host + window.location.pathname);
+  var ws = new WebSocket("ws://"+ window.location.host + window.location.pathname + "/ws");
+
   var counter = 0;
   //var request;
 
-  // websocket message, received from TweetStream::Client
+  // websocket message, received from TweetStream::Client via sinatra-websocket
   ws.onmessage = function(evt) {
     console.log("Message received: "+evt.data);
     //alert(evt.data);

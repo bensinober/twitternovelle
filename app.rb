@@ -5,8 +5,8 @@ require "rubygems"
 require "bundler/setup"
 require "sinatra/base"
 require "sinatra-websocket"
-require "sinatra/reloader"
-require "em-http-request"
+#require "sinatra/reloader"
+#require "em-http-request"
 require "slim"
 require "yajl"
 require "yajl/json_gem"
@@ -48,7 +48,7 @@ class Twitternovelle < Sinatra::Base
       @client = TweetStream::Client.new unless @client
       @client.on_error {|error| logger.error("error: #{error.text}") }
       @client.on_direct_message {|direct_message| logger.info("direct message: #{direct_message.text}") }
-      #@client.on_timeline_status {|status| logger.info("timelinestatus: #{status.text}") }
+      @client.on_timeline_status {|status| logger.info("timelinestatus: #{status.text}") }
       # start userstream
       @client.userstream {|status| EM.next_tick { settings.sockets.each { |s| s.send(status.to_hash.to_json) } } }
     else
@@ -58,31 +58,10 @@ class Twitternovelle < Sinatra::Base
   
   # Routing
   get '/' do
-    if !request.websocket?
-      slim :index, :locals => {:websocket => CONFIG['websocket']}
-    else
-      # start tweetstream
-      stream(run=true)
-      request.websocket do |ws|
-    
-        ws.onopen do
-          #ws.send("Hello World!")
-          settings.sockets << ws
-          logger.info "connected from: #{ws.request['origin']}"
-        end
-    
-        ws.onmessage do |msg|
-          logger.info "Broadcasting Tweet #{msg} -"
-          EM.next_tick { settings.sockets.each{|s| s.send(msg) } }
-        end
-    
-        ws.onclose do
-          #warn("websocket closed")
-          settings.sockets.delete(ws)
-          logger.info "disconnected from: #{ws.request['origin']}"
-        end
-      end
-    end
+    # start tweetstream
+    stream(run=true)
+    "startet strøm"
+    slim :index, :locals => {:websocket => CONFIG['websocket']}
   end
 
   put '/stop' do
@@ -90,16 +69,16 @@ class Twitternovelle < Sinatra::Base
     stream(run=false)
     "stopp saligheta!"
   end
-    
+
   get '/ws' do
-    return false unless @request.websocket?
+    return false unless request.websocket?
   
     request.websocket do |ws|
   
       ws.onopen do
         #ws.send("Hello World!")
         settings.sockets << ws
-        logger.info "connected from: #{ws.request['origin']}"
+        logger.info "connected from: #{ws.request['host']}"
       end
   
       ws.onmessage do |msg|
@@ -110,7 +89,7 @@ class Twitternovelle < Sinatra::Base
       ws.onclose do
         #warn("websocket closed")
         settings.sockets.delete(ws)
-        logger.info "disconnected from: #{ws.request['origin']}"
+        logger.info "disconnected from: #{ws.request['host']}"
       end
     end
   end

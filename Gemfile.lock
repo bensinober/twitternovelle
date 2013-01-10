@@ -3,7 +3,7 @@ GEM
   specs:
     addressable (2.3.2)
     backports (2.6.5)
-    capistrano (2.13.5)
+    capistrano (2.14.1)
       highline
       net-scp (>= 1.0.0)
       net-sftp (>= 2.0.0)
@@ -88,9 +88,9 @@ GEM
       em-twitter (~> 0.2)
       twitter (~> 4.0)
       yajl-ruby (~> 1.1)
-    twitter (4.4.3)
+    twitter (4.4.4)
       faraday (~> 0.8, < 0.10)
-      multi_json (~> 1.3)
+      multi_json (~> 1.0)
       simple_oauth (~> 0.2)
     yajl-ruby (1.1.0)
 
