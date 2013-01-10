@@ -1,6 +1,7 @@
 javascript:
   // Initialize
   var ws = new WebSocket("ws://localhost:4000/ws");
+  var counter = 0;
   //var request;
 
   // websocket message, received from TweetStream::Client
@@ -8,6 +9,8 @@ javascript:
     console.log("Message received: "+evt.data);
     //alert(evt.data);
     var tweet = JSON.parse(evt.data);
+    //increment counter
+    counter+=1;
     // make div scrollable if extend height
     var div = $('#content-right'),
     height = div.height();
@@ -21,8 +24,8 @@ javascript:
     // autoscroll if tweets extend page  
     div.animate({scrollTop: height}, 500);
     height += div.height();
-
-    //console.log($('<div></div>').append(proto.clone()).html());
+    
+    $('#counter').html(counter);
   }
 
   ws.onclose = function() {

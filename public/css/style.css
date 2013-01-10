@@ -25,6 +25,7 @@ div#content-left   { width: 20%; background-color: #ddd;
 div#content-right  { float: right; overflow:hidden; width:70%; padding: 30px; height:600px; 
                      background-color: #ddd; border-radius: 5px;}
 table#tweet_table  { border-spacing:10px; }  
+
 button             { background-color: #e8e8e8; border: 1px solid #888; border-radius: 2px;
                     padding: 3px; color: #160b57; font-size: 12px; font-family: monospace;
                     min-width: 22px;}
@@ -58,6 +59,8 @@ div.left-button-s   { position: relative; padding-top: 10px; display: block; wid
                      background: -moz-linear-gradient(left, #aaa, #eee);}
 .disabled          { visibility: hidden;}
 
+ul.inline          { list-style-type: none }
+ul.inline li       { display: inline; padding: 10px; }
 ul.listevisning    { list-style-type: none }
 ul.listevisning li { display: inline-block; width: 260px; height: 450px;
                      background-color: #ccc; margin: 0 50px 50px 0; padding: 20px;
