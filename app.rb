@@ -19,7 +19,6 @@ class Twitternovelle < Sinatra::Base
   session = {}
   set :server, 'thin'
   set :sockets, []
-
   
   configure :production, :development do
    enable :logging
@@ -59,7 +58,7 @@ class Twitternovelle < Sinatra::Base
     # start tweetstream
     stream(run=true)
     "starta strøm"
-    slim :index
+    slim :index, :locals => {:websocket => CONFIG['websocket']}
   end
 
   put '/stop' do

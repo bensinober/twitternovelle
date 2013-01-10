@@ -6,7 +6,7 @@ twitter:
   oauth_token:        'bbb'
   oauth_token_secret: 'bbbsecret'
   auth_method:        :oauth
-  parser:             :json
+  parser:             :yajl
 
 websocket:
   host: localhost

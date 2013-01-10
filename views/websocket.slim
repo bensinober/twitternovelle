@@ -1,6 +1,6 @@
 javascript:
   // Initialize
-  var ws = new WebSocket("ws://localhost:4000/ws");
+  var ws = new WebSocket("ws://#{websocket['host']}:#{websocket['port']}/ws");
   var counter = 0;
   //var request;
 
