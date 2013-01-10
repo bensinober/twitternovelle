@@ -11,7 +11,7 @@ require "yajl/json_gem"
 require "logger"
 require "tweetstream"
 
-class APP < Sinatra::Base
+class Twitternovelle < Sinatra::Base
 
   # Sinatra configs
   set :static, true
