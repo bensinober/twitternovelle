@@ -21,6 +21,7 @@ class Twitternovelle < Sinatra::Base
   session = {}
   set :server, 'thin'
   set :sockets, []
+  @session = {}
   
   configure :production, :development do
    enable :logging
@@ -39,13 +40,30 @@ class Twitternovelle < Sinatra::Base
   end
   
   # to be used later for logging
-  session[:tweets] = []
+  @session[:tweets] = []
 
+  @session[:client] = TweetStream::Client.new
+  @session[:client].on_error {|error| logger.error("error: #{error.text}") }
+  @session[:client].on_direct_message {|direct_message| logger.info("direct message: #{direct_message.text}") }
+  #@client.on_timeline_status {|status| logger.info("timelinestatus: #{status.text}") }
+  
+  
+  def start_stream
+    # start userstream
+    @session[:client].userstream {|status| EM.next_tick { settings.sockets.each { |s| s.send(status.to_hash.to_json) } } }
+    logger.info "started stream: #{session[:client]}"
+  end
+  
+  def stop_stream
+    logger.info "stopping stream: #{session[:client]}"
+    @session[:client].stop
+  end
+  
   # class methods  
   def stream(run=true)
     if run
       # make sure we don't create multiple streams
-      @client = TweetStream::Client.new unless @client
+      session[:client] = TweetStream::Client.new unless @client
       @client.on_error {|error| logger.error("error: #{error.text}") }
       @client.on_direct_message {|direct_message| logger.info("direct message: #{direct_message.text}") }
       @client.on_timeline_status {|status| logger.info("timelinestatus: #{status.text}") }
@@ -59,17 +77,23 @@ class Twitternovelle < Sinatra::Base
   # Routing
   get '/' do
     # start tweetstream
-    stream(run=true)
-    "startet strøm"
+    #stream(run=true)
+    #"startet strøm"
     slim :index, :locals => {:websocket => CONFIG['websocket']}
   end
 
-  put '/stop' do
+  get '/stop' do
     # stop tweetstream
-    stream(run=false)
-    "stopp saligheta!"
+    stop_stream
+    "stopp saligheita!"
   end
 
+  get '/start' do
+    # start tweetstream
+    start_stream
+    "start saligheita!"
+  end
+  
   get '/ws' do
     return false unless request.websocket?
   

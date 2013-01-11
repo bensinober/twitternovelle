@@ -18,14 +18,14 @@ div id="container"
             li twats så langt
             li[id="counter"] 0
           br  
-          button[type="button" id="tweet_start" class="gen" style="display:none;"] = "kjør strøm"
-          button[type="button" id="tweet_stop" class="gen"]  = "stopp strøm" 
+          button[type="button" id="tweet_start" class="gen"] = "kjør strøm"
+          button[type="button" id="tweet_stop" class="gen" style="display:none;"]  = "stopp strøm" 
           
   javascript:
     $(document).ready(function () {
       $('button#tweet_start').on('click', function() {
         var request = $.ajax({
-          url: '/',
+          url: '/start',
           type: 'GET',
           cache: false
         });
@@ -35,7 +35,7 @@ div id="container"
       $('button#tweet_stop').on('click', function() {
         var request = $.ajax({
           url: '/stop',
-          type: 'PUT'
+          type: 'GET'
         });
         $('button#tweet_stop').hide();
         $('button#tweet_start').show();
