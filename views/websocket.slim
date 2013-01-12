@@ -1,40 +1,42 @@
 javascript:
   // Initialize
-  //var ws = new WebSocket("ws://#{websocket['host']}:#{websocket['port']}/ws");
-  var ws = new WebSocket("ws://"+ window.location.host + window.location.pathname + "/ws");
-
-  var counter = 0;
-  //var request;
-
-  // websocket message, received from TweetStream::Client via sinatra-websocket
-  ws.onmessage = function(evt) {
-    console.log("Message received: "+evt.data);
-    //alert(evt.data);
-    var tweet = JSON.parse(evt.data);
-    //increment counter
-    counter+=1;
-    // make div scrollable if extend height
-    var div = $('#content-right'),
-    height = div.height();
-    
-    $('#tweet_table tbody').append('<tr><td><img src="'+tweet.user["profile_image_url"]+'"/></td>')
-      .append('<td>'+tweet.user["screen_name"]+'</td>')
-      .append('<td>'+tweet.user["name"]+'</td>')
-      .append('<td>'+tweet.user["location"]+'</td>')
-      .append('<td>'+tweet.text+'</td></tr>');
-    
-    // autoscroll if tweets extend page  
-    div.animate({scrollTop: height}, 500);
-    height += div.height();
-    
-    $('#counter').html(counter);
+  var start_websocket = function() {
+    //ws = new WebSocket("ws://#{websocket['host']}:#{websocket['port']}/ws");
+    // local var 'ws' not prefixed by var to be accessible outside function
+    ws = new WebSocket("ws://"+ window.location.host + window.location.pathname + "/ws");
+    console.dir(ws);
+    var counter = 0;
+    //var request;
+  
+    // websocket message, received from TweetStream::Client via sinatra-websocket
+    ws.onmessage = function(evt) {
+      console.log("Message received: "+evt.data);
+      //alert(evt.data);
+      var tweet = JSON.parse(evt.data);
+      //increment counter
+      counter+=1;
+      // make div scrollable if extend height
+      var div = $('#content-right'),
+      height = div.height();
+      
+      $('#tweet_table tbody').append('<tr><td><img src="'+tweet.user["profile_image_url"]+'"/></td>')
+        .append('<td>'+tweet.user["screen_name"]+'</td>')
+        .append('<td>'+tweet.user["name"]+'</td>')
+        .append('<td>'+tweet.user["location"]+'</td>')
+        .append('<td>'+tweet.text+'</td></tr>');
+      
+      // autoscroll if tweets extend page  
+      div.animate({scrollTop: height}, 500);
+      height += div.height();
+      
+      $('#counter').html(counter);
+    }
+  
+    ws.onclose = function() {
+      console.log("Websocket connection lost!");
+    }
+  
+    ws.onopen = function() {
+      console.log("Websocket connected!");
+    }
   }
-
-  ws.onclose = function() {
-    console.log("Websocket connection lost!");
-  }
-
-  ws.onopen = function() {
-    console.log("Websocket connected!");
-  }
-

@@ -6,7 +6,6 @@ require "bundler/setup"
 require "sinatra/base"
 require "sinatra-websocket"
 #require "sinatra/reloader"
-#require "em-http-request"
 require "slim"
 require "yajl"
 require "yajl/json_gem"
@@ -18,17 +17,15 @@ class Twitternovelle < Sinatra::Base
   # Sinatra configs
   set :static, true
   set :root, File.dirname(__FILE__)
-  session = {}
   set :server, 'thin'
   set :sockets, []
-  @session = {}
-  
+
   configure :production, :development do
    enable :logging
   end
  
   CONFIG = YAML::load(File.open("config/config.yml"))
-    
+
   # Twitter API config
   TweetStream.configure do |config|
     config.consumer_key       = CONFIG['twitter']['consumer_key']
@@ -38,47 +35,42 @@ class Twitternovelle < Sinatra::Base
     config.auth_method        = CONFIG['twitter']['auth_method']
     config.parser             = CONFIG['twitter']['parser']
   end
-  
-  # to be used later for logging
-  @session[:tweets] = []
-
-  @session[:client] = TweetStream::Client.new
-  @session[:client].on_error {|error| logger.error("error: #{error.text}") }
-  @session[:client].on_direct_message {|direct_message| logger.info("direct message: #{direct_message.text}") }
-  #@client.on_timeline_status {|status| logger.info("timelinestatus: #{status.text}") }
-  
-  
+    
+  def initialize
+    super
+    @session = {}
+    # to be used later for logging
+    @session[:tweets] = []
+    
+    # open Twitter client connection
+    @session[:client] = TweetStream::Client.new
+    #ping testing...
+    #EM::next_tick do
+    #  EM::add_periodic_timer(1) do
+    #    self.settings.sockets.each do |s|
+    #      s.send("test</br>")
+    #    end
+    #  end
+    #end
+  end
+    
   def start_stream
     # start userstream
+    @session[:client].on_error {|error| logger.error("error: #{error.text}") }
+    @session[:client].on_direct_message {|direct_message| logger.info("direct message: #{direct_message.text}") }
+    #@client.on_timeline_status {|status| logger.info("timelinestatus: #{status.text}") }
     @session[:client].userstream {|status| EM.next_tick { settings.sockets.each { |s| s.send(status.to_hash.to_json) } } }
-    logger.info "started stream: #{session[:client]}"
+    logger.info "started stream: #{@session[:client]}"
   end
   
   def stop_stream
-    logger.info "stopping stream: #{session[:client]}"
+    logger.info "stopping stream: #{@session[:client]}"
     @session[:client].stop
+    @session[:client] = nil
   end
   
-  # class methods  
-  def stream(run=true)
-    if run
-      # make sure we don't create multiple streams
-      session[:client] = TweetStream::Client.new unless @client
-      @client.on_error {|error| logger.error("error: #{error.text}") }
-      @client.on_direct_message {|direct_message| logger.info("direct message: #{direct_message.text}") }
-      @client.on_timeline_status {|status| logger.info("timelinestatus: #{status.text}") }
-      # start userstream
-      @client.userstream {|status| EM.next_tick { settings.sockets.each { |s| s.send(status.to_hash.to_json) } } }
-    else
-      @client.stop if @client
-    end 
-  end
-  
-  # Routing
+  # Routes
   get '/' do
-    # start tweetstream
-    #stream(run=true)
-    #"startet strøm"
     slim :index, :locals => {:websocket => CONFIG['websocket']}
   end
 
@@ -94,6 +86,7 @@ class Twitternovelle < Sinatra::Base
     "start saligheita!"
   end
   
+  # sinatra websocket server
   get '/ws' do
     return false unless request.websocket?
   
@@ -106,7 +99,7 @@ class Twitternovelle < Sinatra::Base
       end
   
       ws.onmessage do |msg|
-        logger.info "Broadcasting Tweet #{msg} -"
+        logger.info "Message from browser client #{msg} -"
         EM.next_tick { settings.sockets.each{|s| s.send(msg) } }
       end
   

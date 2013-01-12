@@ -18,8 +18,10 @@ div id="container"
             li twats så langt
             li[id="counter"] 0
           br  
-          button[type="button" id="tweet_start" class="gen"] = "kjør strøm"
-          button[type="button" id="tweet_stop" class="gen" style="display:none;"]  = "stopp strøm" 
+          button[type="button" id="tweet_start" class="gen"] = "koble til Twitter"
+          button[type="button" id="tweet_stop" class="gen" style="display:none;"]  = "koble fra Twitter" 
+          button[type="button" id="websocket_open" class="gen" ] = "åpne websocket"
+          button[type="button" id="websocket_close" class="gen" style="display:none;"]  = "lukk websocket" 
           
   javascript:
     $(document).ready(function () {
@@ -39,7 +41,18 @@ div id="container"
         });
         $('button#tweet_stop').hide();
         $('button#tweet_start').show();
-        
-      });  
+      });
+      // open websocket
+      $('button#websocket_open').on('click', function() {
+        start_websocket();
+        $('button#websocket_open').hide();
+        $('button#websocket_close').show();
+      });
+      // close websocket
+      $('button#websocket_close').on('click', function() {
+        ws.close();
+        $('button#websocket_open').show();
+        $('button#websocket_close').hide();
+      });    
     });             
   == render :slim, :'websocket', :locals => {:websocket => websocket}
