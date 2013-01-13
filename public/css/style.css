@@ -22,7 +22,7 @@ div#contents       { padding-left: 25px; padding-top: 35px;
                      float: left; background-color: #fff; width: 1400px; overflow:hidden;}
 div#content-left   { width: 20%; background-color: #ddd;
                      border-radius: 5px; float: left; padding: 30px; color:#444;}
-div#content-right  { float: right; overflow:hidden; width:70%; padding: 30px; height:600px; 
+div#content-right  { float: right; width:70%; padding: 30px; height:600px; /*overflow:hidden;*/
                      background-color: #ddd; border-radius: 5px;}
 table#tweet_table  { border-spacing:10px; }  
 

@@ -6,4 +6,4 @@ $stderr.sync = true
 $stdout.sync = true
 
 require File.join(File.dirname(__FILE__), 'app')
-run Twitternovelle
+run Twitternovelle.new

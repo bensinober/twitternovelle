@@ -5,6 +5,8 @@ div id="container"
     
     div id="content-right"
       h1 tweets
+      - if track_terms
+        h2 "tracking #{track_terms}"
       div 
       table id="tweet_table"
         tbody
@@ -14,6 +16,11 @@ div id="container"
           h1 twitternovelle
           p sjekk ut en tweetstrøm og se den oppdatere seg automatisk via html5 websockets
           br
+          ul class="inline"
+            li: input[type="text" id="track_terms"]
+            button[type="button" id="track_terms_button" class="gen"] = "søk"
+          
+          hr
           ul class="inline"
             li twats så langt
             li[id="counter"] 0
@@ -25,6 +32,17 @@ div id="container"
           
   javascript:
     $(document).ready(function () {
+      // search 
+      $('button#track_terms_button').on('click', function() {
+        var request = $.ajax({
+          url: '/',
+          type: 'POST',
+          cache: false,
+          data: { track_terms: $('input#track_terms').val() },
+          dataType: 'json'
+        });
+      });
+        
       $('button#tweet_start').on('click', function() {
         var request = $.ajax({
           url: '/start',

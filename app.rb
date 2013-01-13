@@ -54,26 +54,43 @@ class Twitternovelle < Sinatra::Base
     #end
   end
     
-  def start_stream
+  def start_stream(track_terms=nil)
     # start userstream
     @session[:client].on_error {|error| logger.error("error: #{error.text}") }
     @session[:client].on_direct_message {|direct_message| logger.info("direct message: #{direct_message.text}") }
     #@client.on_timeline_status {|status| logger.info("timelinestatus: #{status.text}") }
-    @session[:client].userstream {|status| EM.next_tick { settings.sockets.each { |s| s.send(status.to_hash.to_json) } } }
-    logger.info "started stream: #{@session[:client]}"
+    # unless session[:track_terms] is set
+    if track_terms
+      #split track terms or user id's by space and join as comma-separated list
+      @session[:track_terms] = track_terms.split(' ').join(',')
+      @session[:client].track(@session[:track_terms]) {|status| EM.next_tick { settings.sockets.each { |s| s.send(status.to_hash.to_json) } } }
+    else
+      @session[:client].userstream {|status| EM.next_tick { settings.sockets.each { |s| s.send(status.to_hash.to_json) } } }
+    end
+    logger.info "started stream: #{@session[:client].inspect}"
   end
   
   def stop_stream
-    logger.info "stopping stream: #{@session[:client]}"
+    logger.info "stopping stream: #{@session[:client].inspect}"
     @session[:client].stop
     @session[:client] = nil
   end
   
   # Routes
   get '/' do
-    slim :index, :locals => {:websocket => CONFIG['websocket']}
+    slim :index, :locals => {:websocket => CONFIG['websocket'], :track_terms => nil}
   end
 
+  post '/' do
+    if params[:track_terms]
+      logger.info "track terms: #{params[:track_terms]}"
+      start_stream(params[:track_terms])
+      slim :index, :locals => {:websocket => CONFIG['websocket'], :track_terms => params[:track_terms]}
+    else
+      "no term sent!"
+    end
+  end
+  
   get '/stop' do
     # stop tweetstream
     stop_stream
