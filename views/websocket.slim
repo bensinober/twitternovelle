@@ -1,11 +1,11 @@
 javascript:
   // Initialize
   var start_websocket = function() {
-    //ws = new WebSocket("ws://#{websocket['host']}:#{websocket['port']}/ws");
+    ws = new WebSocket("ws://#{websocket['host']}:#{websocket['port']}/ws");
     // local var 'ws' not prefixed by var to be accessible outside function
-    ws = new WebSocket("ws://"+ window.location.host + window.location.pathname + "/ws");
+    //ws = new WebSocket("ws://"+ window.location.host + window.location.pathname + "/ws");
     console.dir(ws);
-    var counter = 0;
+    var counter = parseInt($('#counter').html());
     //var request;
   
     // websocket message, received from TweetStream::Client via sinatra-websocket

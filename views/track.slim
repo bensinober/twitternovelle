@@ -16,43 +16,17 @@ div id="container"
           h1 twitternovelle
           p sjekk ut en tweetstrøm og se den oppdatere seg automatisk via html5 websockets
           br
-          form action="/track" method="POST" id="search_form"
-            ul class="inline"
-              li: input[type="text" name="track_terms"]
-              button[type="submit" id="track_terms_button" class="gen"] = "søk"
           
           hr
           ul class="inline"
             li twats så langt
             li[id="counter"] 0
           br  
-          - unless track_terms
-            button[type="button" id="tweet_start" class="gen"] = "Twitter userstream"
-            button[type="button" id="tweet_stop" class="gen" style="display:none;"]  = "koble fra Twitter" 
           button[type="button" id="websocket_open" class="gen" ] = "åpne websocket"
           button[type="button" id="websocket_close" class="gen" style="display:none;"]  = "lukk websocket" 
           
   javascript:
     $(document).ready(function () {
-
-      // tweet start/stop hidden if search is active
-      $('button#tweet_start').on('click', function() {
-        var request = $.ajax({
-          url: '/start',
-          type: 'GET',
-          cache: false
-        });
-        $('button#tweet_stop').show();
-        $('button#tweet_start').hide();
-      });
-      $('button#tweet_stop').on('click', function() {
-        var request = $.ajax({
-          url: '/stop',
-          type: 'GET'
-        });
-        $('button#tweet_stop').hide();
-        $('button#tweet_start').show();
-      });
       // open websocket
       $('button#websocket_open').on('click', function() {
         start_websocket();

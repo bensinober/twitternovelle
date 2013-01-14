@@ -5,7 +5,6 @@ require "rubygems"
 require "bundler/setup"
 require "sinatra/base"
 require "sinatra-websocket"
-#require "sinatra/reloader"
 require "slim"
 require "yajl"
 require "yajl/json_gem"
@@ -23,7 +22,12 @@ class Twitternovelle < Sinatra::Base
   configure :production, :development do
    enable :logging
   end
- 
+  configure :development do
+    require "sinatra/reloader"
+    register Sinatra::Reloader
+    also_reload '*.rb'
+  end
+  
   CONFIG = YAML::load(File.open("config/config.yml"))
 
   # Twitter API config
@@ -81,11 +85,11 @@ class Twitternovelle < Sinatra::Base
     slim :index, :locals => {:websocket => CONFIG['websocket'], :track_terms => nil}
   end
 
-  post '/' do
+  post '/track' do
     if params[:track_terms]
       logger.info "track terms: #{params[:track_terms]}"
       start_stream(params[:track_terms])
-      slim :index, :locals => {:websocket => CONFIG['websocket'], :track_terms => params[:track_terms]}
+      slim :track, :locals => {:websocket => CONFIG['websocket'], :track_terms => params[:track_terms]}
     else
       "no term sent!"
     end
