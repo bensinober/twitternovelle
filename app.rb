@@ -71,39 +71,48 @@ class Twitternovelle < Sinatra::Base
     else
       @session[:client].userstream {|status| EM.next_tick { settings.sockets.each { |s| s.send(status.to_hash.to_json) } } }
     end
-    logger.info "started stream: #{@session[:client].inspect}"
+    logger.info "started stream: #{@session[:client].stream.inspect}"
+    @session[:client].stream
   end
   
-  def stop_stream
-    logger.info "stopping stream: #{@session[:client].inspect}"
-    @session[:client].stop
-    @session[:client] = nil
-  end
+  #def stop_stream
+  #  logger.info "stopping stream: #{@session[:client].inspect}"
+  #  @session[:client].stop
+  #  #@session[:client] = nil
+  #end
   
   # Routes
   get '/' do
-    slim :index, :locals => {:websocket => CONFIG['websocket'], :track_terms => nil}
+    slim :index, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms]}
   end
 
   post '/track' do
     if params[:track_terms]
+      @session[:stream].stop if @session[:stream] # close running stream
+      
       logger.info "track terms: #{params[:track_terms]}"
-      start_stream(params[:track_terms])
-      slim :track, :locals => {:websocket => CONFIG['websocket'], :track_terms => params[:track_terms]}
+      @session[:track_terms] = params[:track_terms]
+      @session[:stream] = start_stream(params[:track_terms])
+      slim :track, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms]}
     else
-      "no term sent!"
+      "no new term sent!"
     end
+  end
+
+  # Routes
+  get '/track' do
+    slim :track, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms]}
   end
   
   get '/stop' do
     # stop tweetstream
-    stop_stream
+    session[:stream].stop
     "stopp saligheita!"
   end
 
   get '/start' do
     # start tweetstream
-    start_stream
+    session[:stream] = start_stream
     "start saligheita!"
   end
   
