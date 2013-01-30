@@ -4,17 +4,20 @@ div id="container"
   div id="contents"
     
     div id="content-right"
-      h1 tweets
-      - if track_terms
-        p tracking "#{track_terms}"
-      div 
-      table id="tweet_table"
-        tbody
-          tr
+      div id="content-right-top"
+        h1 tweets
+        - if track_terms
+          p tracking "#{track_terms}"
+        div 
+        table id="tweet_table"
+          tbody
+            tr
+      div id="content-right-bottom"
+        p info here
   
     div id="content-left"
-          h1 twitternovelle
-          p sjekk ut en tweetstrøm og se den oppdatere seg automatisk via html5 websockets
+          h2 Info om prosjektet
+          p Twittertevling er et samarbeid mellom bakkar og berg
           br
           form action="/track" method="POST" id="search_form"
             ul class="inline"
