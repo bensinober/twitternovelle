@@ -11,23 +11,36 @@ javascript:
     // websocket message, received from TweetStream::Client via sinatra-websocket
     ws.onmessage = function(evt) {
       console.log("Message received: "+evt.data);
-      //alert(evt.data);
       var tweet = JSON.parse(evt.data);
       //increment counter
       counter+=1;
-      // make div scrollable if extend height
-      var div = $('#content-right'),
-      height = div.height();
-      
-      $('#tweet_table tbody').append('<tr><td><img src="'+tweet.user["profile_image_url"]+'"/></td>')
-        .append('<td>'+tweet.user["screen_name"]+'</td>')
+      // last tweet JSON
+      // available: 
+      //  .user["profile_image_url"]
+      //  .user["screen_name"]
+      //  .user["name"]
+      //  .user["location"]
+      //  .text
+      $('#last-tweet tbody').html('<tr><td><img src="'+tweet.user["profile_image_url"]+'"/></td>')
         .append('<td>'+tweet.user["name"]+'</td>')
-        .append('<td>'+tweet.user["location"]+'</td>')
         .append('<td>'+tweet.text+'</td></tr>');
       
+      // make div scrollable if extend height
+      //var div = $('#content-right-bottom'),
+      //height = div.height();
+
+      
+      $('#previous-tweets tbody').prepend('<tr><td><img src="'+tweet.user["profile_image_url"]+'"/></td>' +
+        '<td>'+tweet.user["name"]+'</td>' +
+        '<td>'+tweet.text+'</td></tr>');
+      // previous tweets
+      $("#previous-tweets tr:gt(5)").hide(); // hide all after row six
+      $("#previous-tweets tr:eq(0)").hide(); // hide first (last tweet)
+      $("#previous-tweets tr:eq(1)").show(); // show first (last tweet)
+                        
       // autoscroll if tweets extend page  
-      div.animate({scrollTop: height}, 500);
-      height += div.height();
+      //div.animate({scrollTop: height}, 500);
+      //height += div.height();
       
       $('#counter').html(counter);
     }

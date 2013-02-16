@@ -67,7 +67,12 @@ class Twitternovelle < Sinatra::Base
     if track_terms
       #split track terms or user id's by space and join as comma-separated list
       @session[:track_terms] = track_terms.split(' ').join(',')
-      @session[:client].track(@session[:track_terms]) {|status| EM.next_tick { settings.sockets.each { |s| s.send(status.to_hash.to_json) } } }
+      @session[:client].track(@session[:track_terms]) do |status| 
+        EM.next_tick do
+          settings.sockets.each { |s| s.send(status.to_hash.to_json) } 
+          save_tweet(status.to_hash.to_json)
+        end
+      end
     else
       @session[:client].userstream {|status| EM.next_tick { settings.sockets.each { |s| s.send(status.to_hash.to_json) } } }
     end
@@ -75,6 +80,9 @@ class Twitternovelle < Sinatra::Base
     @session[:client].stream
   end
   
+  def save_tweet(tweet)
+    session[:tweets] << status.to_hash.to_json
+  end
   #def stop_stream
   #  logger.info "stopping stream: #{@session[:client].inspect}"
   #  @session[:client].stop

@@ -5,22 +5,24 @@ div id="container"
     
     div id="content-right"
       div id="content-right-top"
-        h1 siste tweet
-        p ekstra fet tweet
-        - if track_terms
-          p tracking "#{track_terms}"
-        div 
-        table id="tweet_table"
-          tbody
-            tr
+        //- if track_terms
+        //  p tracking "#{track_terms}"
+        div
+          p siste tweet 
+          table id="last-tweet"
+            tbody
+              tr
       div id="content-right-bottom"
-        h1 twitterarkiv
-        p info here
+        div 
+          p siste fem
+          table id="previous-tweets"
+            tbody
+              tr
   
     div id="content-left"
           h2 Info om prosjektet
           hr
-          p Twittertevling er et samarbeid mellom bakkar og berg
+          p Twittertevling er et samarbeid mellom bakkar og berg utmed haaaaavet...
           br
           form action="/track" method="POST" id="search_form"
             ul class="inline"
