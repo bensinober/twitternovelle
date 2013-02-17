@@ -147,7 +147,7 @@ class Twitternovelle < Sinatra::Base
         logger.info "disconnected from: #{ws.request['host']}"
       end
       
-      ws.error do | error|
+      ws.onerror do | error|
         logger.info "error: #{error}"
       end      
     end
