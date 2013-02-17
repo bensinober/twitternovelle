@@ -81,7 +81,7 @@ class Twitternovelle < Sinatra::Base
   end
   
   def save_tweet(tweet)
-    session[:tweets] << status
+    session[:tweets] << tweet
   end
   #def stop_stream
   #  logger.info "stopping stream: #{@session[:client].inspect}"
