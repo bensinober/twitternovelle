@@ -81,7 +81,7 @@ class Twitternovelle < Sinatra::Base
   end
   
   def save_tweet(tweet)
-    session[:tweets] << status.to_hash.to_json
+    session[:tweets] << status
   end
   #def stop_stream
   #  logger.info "stopping stream: #{@session[:client].inspect}"
@@ -146,6 +146,10 @@ class Twitternovelle < Sinatra::Base
         settings.sockets.delete(ws)
         logger.info "disconnected from: #{ws.request['host']}"
       end
+      
+      ws.error do | error|
+        logger.info "error: #{error}"
+      end      
     end
   end
   
