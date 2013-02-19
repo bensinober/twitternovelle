@@ -18,7 +18,7 @@ class Twitternovelle < Sinatra::Base
   set :root, File.dirname(__FILE__)
   set :server, 'thin'
   set :sockets, []
-
+  
   configure :production, :development do
    enable :logging
   end
@@ -29,7 +29,8 @@ class Twitternovelle < Sinatra::Base
   end
   
   CONFIG = YAML::load(File.open("config/config.yml"))
-
+  TWEETS = File.join(File.dirname(__FILE__), 'logs/', 'tweets.json')
+  
   # Twitter API config
   TweetStream.configure do |config|
     config.consumer_key       = CONFIG['twitter']['consumer_key']
@@ -70,7 +71,7 @@ class Twitternovelle < Sinatra::Base
       @session[:client].track(@session[:track_terms]) do |status| 
         EM.next_tick do
           settings.sockets.each { |s| s.send(status.to_hash.to_json) } 
-          save_tweet(status.to_hash.to_json)
+          save_tweet(JSON.parse(status.to_hash.to_json))
         end
       end
     else
@@ -80,8 +81,18 @@ class Twitternovelle < Sinatra::Base
     @session[:client].stream
   end
   
-  def save_tweet(tweet)
-    @session[:tweets] << JSON.parse(tweet)
+  def save_tweet(status)
+    tweet = status.to_hash.select { |k,v| ["created_at", "text", "geo", "coordinates", "place", "user"].include?(k) }
+    tweet['user'] = tweet['user'].select { |k,v| ["id", "name", "screen_name", "location", "description", "geo_enabled", "statuses_count", "lang", "profile_image_url"].include?(k) }
+    
+    unless File.exist?(TWEETS)
+      File.open(TWEETS, 'w') {|f| f.write(JSON.pretty_generate(JSON.parse({"tweets"=>[]}.to_json)))}
+    end
+    puts tweet
+    file = JSON.parse(IO.read(TWEETS))
+    file['tweets'] << tweet
+    File.open(TWEETS, 'w') {|f| f.write(JSON.pretty_generate(JSON.parse(file.to_json)))}
+    @session[:tweets] << tweet
   end
   #def stop_stream
   #  logger.info "stopping stream: #{@session[:client].inspect}"
