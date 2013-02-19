@@ -8,7 +8,7 @@ div id="container"
         //- if track_terms
         //  p tracking "#{track_terms}"
         div
-          p siste tweet 
+          p siste tweet om "#{track_terms}"
           table id="last-tweet"
             tbody
               tr
@@ -19,7 +19,7 @@ div id="container"
                 td #{tweets.last["text"]}
       div id="content-right-bottom"
         div 
-          p siste fem
+          p siste fem om "#{track_terms}"
           table id="previous-tweets"
             tbody
             - unless tweets.empty?
@@ -42,9 +42,9 @@ div id="container"
               button[type="submit" id="track_terms_button" class="gen"] = "søk"
           
           hr
-          ul class="inline"
-            li twats så langt
-            li[id="counter"] 0
+          //ul class="inline"
+            //li twats så langt
+            //li[id="counter"] 0
           br  
           - unless track_terms
             button[type="button" id="tweet_start" class="gen"] = "Twitter userstream"
