@@ -81,7 +81,7 @@ class Twitternovelle < Sinatra::Base
   end
   
   def save_tweet(tweet)
-    @session[:tweets] << tweet
+    @session[:tweets] << JSON.parse(tweet)
   end
   #def stop_stream
   #  logger.info "stopping stream: #{@session[:client].inspect}"
@@ -91,7 +91,7 @@ class Twitternovelle < Sinatra::Base
   
   # Routes
   get '/' do
-    slim :index, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms]}
+    slim :index, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => @session[:tweets]}
   end
 
   post '/track' do

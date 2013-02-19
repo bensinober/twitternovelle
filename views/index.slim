@@ -12,13 +12,25 @@ div id="container"
           table id="last-tweet"
             tbody
               tr
+              - unless tweets.empty?
+                // print last tweet
+                td: img[src=(tweets.last["user"]["profile_image_url"])] 
+                td #{tweets.last["user"]["name"]} 
+                td #{tweets.last["text"]}
       div id="content-right-bottom"
         div 
           p siste fem
           table id="previous-tweets"
             tbody
+            - unless tweets.empty?
+              // take the second last and 5 more 
+              - tweets.reverse[1..5].each do |tweet|
+                tr
+                  td: img[src=(tweet["user"]["profile_image_url"])] 
+                  td #{tweet["user"]["name"]}
+                  td #{tweet["text"]}
+            - else
               tr
-  
     div id="content-left"
           h2 Info om prosjektet
           hr
