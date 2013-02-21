@@ -19,7 +19,7 @@ div id="container"
                 td #{tweets.last["text"]}
       div id="content-right-bottom"
         div 
-          p siste fem om "#{track_terms}"
+          p siste tre om "#{track_terms}"
           table id="previous-tweets"
             tbody
             - unless tweets.empty?
@@ -35,26 +35,25 @@ div id="container"
           h2 Info om prosjektet
           hr
           p Twittertevling er et samarbeid mellom bakkar og berg utmed haaaaavet...
-          br
-          form action="/" method="POST" id="search_form"
-            ul class="inline"
-              li: input[type="text" name="track_terms"]
-              button[type="submit" id="track_terms_button" class="gen"] = "søk"
-          
-          hr
+          //br
+          //form action="/" method="POST" id="search_form"
+          //  ul class="inline"
+          //    li: input[type="text" name="track_terms"]
+          //    button[type="submit" id="track_terms_button" class="gen"] = "søk"
           //ul class="inline"
             //li twats så langt
             //li[id="counter"] 0
-          br  
-          - unless track_terms
-            button[type="button" id="tweet_start" class="gen"] = "Twitter userstream"
-            button[type="button" id="tweet_stop" class="gen" style="display:none;"]  = "koble fra Twitter" 
-          button[type="button" id="websocket_open" class="gen" ] = "åpne websocket"
-          button[type="button" id="websocket_close" class="gen" style="display:none;"]  = "lukk websocket" 
+          //br  
+          //- unless track_terms
+          //  button[type="button" id="tweet_start" class="gen"] = "Twitter userstream"
+          //  button[type="button" id="tweet_stop" class="gen" style="display:none;"]  = "koble fra Twitter" 
+          //button[type="button" id="websocket_open" class="gen" ] = "åpne websocket"
+          //button[type="button" id="websocket_close" class="gen" style="display:none;"]  = "lukk websocket" 
           
   javascript:
     $(document).ready(function () {
-
+      // start websocket automatically on page load
+      start_websocket();
       // tweet start/stop hidden if search is active
       $('button#tweet_start').on('click', function() {
         var request = $.ajax({

@@ -112,7 +112,8 @@ class Twitternovelle < Sinatra::Base
       logger.info "track terms: #{params[:track_terms]}"
       @session[:track_terms] = params[:track_terms]
       @session[:stream] = start_stream(params[:track_terms])
-      slim :index, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => @session[:tweets]}
+      #slim :index, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => @session[:tweets]}
+      "started stream and tracking: #{@session[:track_terms]}"
     else
       "no new term sent!"
     end

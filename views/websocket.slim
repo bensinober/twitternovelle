@@ -4,8 +4,8 @@ javascript:
     ws = new WebSocket("ws://#{websocket['host']}:#{websocket['port']}/ws");
     // local var 'ws' not prefixed by var to be accessible outside function
     //ws = new WebSocket("ws://"+ window.location.host + window.location.pathname + "/ws");
-    console.dir(ws);
-    var counter = parseInt($('#counter').html());
+    //console.dir(ws);
+    //var counter = parseInt($('#counter').html());
     //var request;
   
     // websocket message, received from TweetStream::Client via sinatra-websocket
@@ -13,7 +13,7 @@ javascript:
       console.log("Message received: "+evt.data);
       var tweet = JSON.parse(evt.data);
       //increment counter
-      counter+=1;
+      //counter+=1;
       // last tweet JSON
       // available: 
       //  .user["profile_image_url"]
@@ -34,7 +34,7 @@ javascript:
         '<td>'+tweet.user["name"]+'</td>' +
         '<td>'+tweet.text+'</td></tr>');
       // previous tweets
-      $("#previous-tweets tr:gt(5)").hide(); // hide all after row six
+      $("#previous-tweets tr:gt(3)").hide(); // hide all after row four
       $("#previous-tweets tr:eq(0)").hide(); // hide first (last tweet)
       $("#previous-tweets tr:eq(1)").show(); // show first (last tweet)
                         
@@ -42,7 +42,7 @@ javascript:
       //div.animate({scrollTop: height}, 500);
       //height += div.height();
       
-      $('#counter').html(counter);
+      //$('#counter').html(counter);
     }
   
     ws.onclose = function() {
