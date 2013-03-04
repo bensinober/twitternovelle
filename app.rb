@@ -105,6 +105,9 @@ class Twitternovelle < Sinatra::Base
     slim :index, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => @session[:tweets]}
   end
 
+  get '/tema' do
+  end
+  
   post '/' do
     if params[:track_terms]
       @session[:stream].stop if @session[:stream] # close running stream
