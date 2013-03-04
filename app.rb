@@ -46,6 +46,7 @@ class Twitternovelle < Sinatra::Base
     @session = {}
     # to be used later for logging
     @session[:tweets] = []
+    @session[:track_terms] = "#nynov"
     
     # open Twitter client connection
     @session[:client] = TweetStream::Client.new
@@ -103,9 +104,6 @@ class Twitternovelle < Sinatra::Base
   # Routes
   get '/' do
     slim :index, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => @session[:tweets]}
-  end
-
-  get '/tema' do
   end
   
   post '/' do
