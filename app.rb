@@ -46,7 +46,7 @@ class Twitternovelle < Sinatra::Base
     @session = {}
     # to be used later for logging
     @session[:tweets] = []
-    @session[:track_terms] = "#nynov"
+    @session[:track_terms] = ""
     
     # open Twitter client connection
     @session[:client] = TweetStream::Client.new
