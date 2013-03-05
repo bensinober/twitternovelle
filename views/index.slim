@@ -8,7 +8,7 @@ div id="container"
         //- if track_terms
         //  p tracking "#{track_terms}"
         div
-          p siste tweet om "#{track_terms}"
+          p siste tweet om #{track_terms}
           table id="last-tweet"
             tbody
               tr
@@ -19,7 +19,7 @@ div id="container"
                 td #{tweets.last["text"]}
       div id="content-right-bottom"
         div 
-          p siste tre om "#{track_terms}"
+          p siste tre
           table id="previous-tweets"
             tbody
             - unless tweets.empty?
