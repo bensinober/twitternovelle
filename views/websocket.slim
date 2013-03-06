@@ -23,6 +23,7 @@ javascript:
       //  .text
       $('#last-tweet tbody').html('<tr><td><img src="'+tweet.user["profile_image_url"]+'"/></td>')
         .append('<td>'+tweet.user["name"]+'</td>')
+        .append('<td colspan="4">&nbsp;:&nbsp;</td>')
         .append('<td>'+tweet.text+'</td></tr>');
       
       // make div scrollable if extend height
@@ -32,6 +33,7 @@ javascript:
       
       $('#previous-tweets tbody').prepend('<tr><td><img src="'+tweet.user["profile_image_url"]+'"/></td>' +
         '<td>'+tweet.user["name"]+'</td>' +
+        '<td colspan="4">&nbsp;&nbsp;:&nbsp;&nbsp;</td>' +
         '<td>'+tweet.text+'</td></tr>');
       // previous tweets
       $("#previous-tweets tr:gt(3)").hide(); // hide all after row four

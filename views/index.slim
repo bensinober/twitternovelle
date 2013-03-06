@@ -15,7 +15,8 @@ div id="container"
               - unless tweets.empty?
                 // print last tweet
                 td: img[src=(tweets.last["user"]["profile_image_url"])] 
-                td #{tweets.last["user"]["name"]} 
+                td #{tweets.last["user"]["name"]}
+                td[colspan="4"] = '  :  '
                 td #{tweets.last["text"]}
       div id="content-right-bottom"
         div 
@@ -27,7 +28,8 @@ div id="container"
               - tweets.reverse[1..5].each do |tweet|
                 tr
                   td: img[src=(tweet["user"]["profile_image_url"])] 
-                  td #{tweet["user"]["name"]}
+                  td #{tweet["user"]["name"]} 
+                  td[colspan="4"] = '  :  '
                   td #{tweet["text"]}
             - else
               tr
@@ -40,7 +42,7 @@ div id="container"
           br
 
           p Seks gongar i løpet av året vert eit nytt tema lansert, og so lenge ein relaterer teksten til det gjevne temaet, 
-            skriv på nynorsk, brukar hashtagen #nynov og held seg twitterformatets tilmålte 140 teikn, er alle bidrag velkomne. 
+            skriv på nynorsk, brukar hashtagen #{track_terms} og held seg twitterformatets tilmålte 140 teikn, er alle bidrag velkomne. 
             Tekstar kan komme i form av dikt, noveller eller for den saks skuld, korte avhandlingar.
           br
 
