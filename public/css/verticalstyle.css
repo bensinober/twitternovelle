@@ -1,0 +1,31 @@
+*                  { margin:0; padding:0; border:0; }
+.select-disable     { -khtml-user-select: none; -moz-user-select: none;
+                    -o-user-select: none;  user-select: none; }
+button::-moz-focus-inner { border: 0; }
+
+body               { font-family: Arial, sans-serif; font-size:100%; overflow:hidden}
+h2                 { font-size: 2em; color: #222; letter-spacing: 2px; line-height: 1.1em;}
+hr                 { border: 1px solid gray; width: 91%; margin-top: 20px; margin-bottom: 20px;}
+a:link             { text-decoration: none; color: #444;}
+a:visited          { color: #444;}
+a:active, a:focus  { outline-style: none; outline: 0; }
+
+div#container      { width: 100%; color: #222; }
+
+div#header         { height: 150px; width: 100%; background: #4099FF; 
+                     background-image: url(https://si0.twimg.com/images/themes/theme1/bg.png); }
+   #header p       { font-family: Impact, sans-serif; font-size:3em; padding:50px 0 0 30px; }
+div#contents       { float: left; background-color: #eee; width: 100%; overflow:hidden;}
+div#content-top   { display:none; background-color: #ddd; border-radius: 5px; 
+                     margin: 30px; float: left; font-size: 1.2em; padding: 30px; 
+                    height: auto; color: #444; box-shadow: 1px 2px 20px 5px rgba(0,0,0,0.5); }
+div#content-middle { background-color: #ddd; border-radius: 5px; 
+                     margin: 30px; float: left; font-size: 1.3em; padding: 30px; 
+                    height: auto; color: #444; box-shadow: 1px 2px 20px 5px rgba(0,0,0,0.5); }
+div#content-right-bottom { background-color: #ddd; border-radius: 5px; overflow:auto;
+                     margin: 30px; float: left; font-size: 1.2em; padding: 30px; 
+                    height: 300px; color: #444; box-shadow: 1px 2px 20px 5px rgba(0,0,0,0.5); }
+                    
+#last-tweet        { font-size: 2em; color: #222; letter-spacing: 1.5px; line-height: 1.1em; }
+#previous-tweets   { font-size: 1.5em; color: #222; letter-spacing: 1.5px; border-collapse: separate; }
+#previous-tweets tr { height: 3em;}

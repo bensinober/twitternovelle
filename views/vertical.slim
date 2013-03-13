@@ -1,0 +1,66 @@
+== render :slim, :'verticalheader'
+
+div id="container"
+  div id="contents"
+
+    div id="content-top"
+      h2 Info om prosjektet
+      hr
+      p Nynorsk i 140 er ei Twitter-tevling i samband med Språkåret 2013.
+        Tevlinga er arrangert av Deichmanske bibliotek med stønad frå Fritt ord.
+      
+      br
+
+      p Vi inviterer til seks tevlingar med seks ulike tema i løpet av året. Alle bidrag må innehalde tema-ordet, 
+        hashtagen #nynov og vere skrivne på nynorsk. Tekstar kan komme i form av dikt, noveller eller for den saks skuld,
+        korte avhandlingar. 
+      br
+
+      p Månadens tema er: #{track_terms}    
+      
+    div id="content-middle"
+      div
+        p siste tweet om #{track_terms}
+        table id="last-tweet"
+          tbody
+            tr
+            - unless tweets.empty?
+              // print last tweet
+              td: img[src=(tweets.last["user"]["profile_image_url"])] 
+              td #{tweets.last["user"]["name"]}
+              td[colspan="4"] = '  :  '
+              td #{tweets.last["text"]}
+    div id="content-right-bottom"
+      div 
+        p siste fem
+        table id="previous-tweets"
+          tbody
+          - unless tweets.empty?
+            // take the second last and 5 more 
+            - tweets.reverse[1..5].each do |tweet|
+              tr
+                td: img[src=(tweet["user"]["profile_image_url"])] 
+                td #{tweet["user"]["name"]} 
+                td[colspan="4"] = '  :  '
+                td #{tweet["text"]}
+          - else
+            tr
+          
+  javascript:
+    $(document).ready(function () {
+      // start websocket automatically on page load
+      start_websocket();
+      // animate archive
+      animate_archive = function() {
+        $('#content-right-bottom').animate({
+          "scrollTop": $('#content-right-bottom').scrollTop()
+        }, 5000, endOfScroll());
+      }
+      function endOfScroll() {
+        if($('#content-right-bottom').scrollTop() >= 300) {
+          $('#content-right-bottom').animate({scrollTop:0});
+          animate_archive();
+        }
+      }
+    });
+  == render :slim, :'websocket', :locals => {:websocket => websocket}
