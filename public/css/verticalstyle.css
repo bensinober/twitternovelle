@@ -19,12 +19,12 @@ img.logo           { float:right; }
    
 div#contents       { float: left; background-color: #eee; width: 100%; overflow:hidden;}
 div#content-top   { background-color: #ddd; border-radius: 5px; 
-                     margin: 30px; float: left; font-size: 1.2em; padding: 30px; 
+                     width: 93%; margin: 30px; float: left; font-size: 1.2em; padding: 30px; 
                     height: auto; color: #444; box-shadow: 1px 2px 20px 5px rgba(0,0,0,0.5); }
-div#content-middle { background-color: #ddd; border-radius: 5px; 
+div#content-middle { width: 93%; background-color: #ddd; border-radius: 5px; 
                      margin: 30px; float: left; font-size: 1.3em; padding: 30px; 
                     height: auto; color: #444; box-shadow: 1px 2px 20px 5px rgba(0,0,0,0.5); }
-div#content-right-bottom { background-color: #ddd; border-radius: 5px; overflow:hidden;
+div#content-right-bottom { width: 93%; background-color: #ddd; border-radius: 5px; overflow:hidden;
                      margin: 30px; float: left; font-size: 1.2em; padding: 30px; 
                     height: auto; color: #444; box-shadow: 1px 2px 20px 5px rgba(0,0,0,0.5); }
                     
