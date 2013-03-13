@@ -36,7 +36,7 @@ javascript:
         '<td colspan="4">&nbsp;&nbsp;:&nbsp;&nbsp;</td>' +
         '<td>'+tweet.text+'</td></tr>');
       // previous tweets
-      //$("#previous-tweets tr:gt(5)").hide(); // hide all after row four
+      $("#previous-tweets tr:gt(5)").hide(); // hide all after row four
       $("#previous-tweets tr:eq(0)").hide(); // hide first (last tweet)
       $("#previous-tweets tr:eq(1)").show(); // show first (last tweet)
                         

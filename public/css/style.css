@@ -14,17 +14,17 @@ div#container      { width: 100%; color: #222; }
 
 div#header         { height: 150px; width: 100%; background: #4099FF; 
                      background-image: url(https://si0.twimg.com/images/themes/theme1/bg.png); }
-   #header p       { font-family: Impact, sans-serif; font-size:3em; padding:50px 0 0 30px; }
+   #header p       { font-family: Impact, sans-serif; font-size:3em; color: #444; padding:50px 0 0 30px; }
    
 img.logo           { float:right; }
 div#contents       { float: left; background-color: #eee; width: 100%; overflow:hidden;}
 div#content-left   { width: 20%; background-color: #ddd; border-radius: 5px; float: left; margin:30px 0 0 30px; font-size:1.5em;
-                    padding: 30px 15px 30px 30px; height: auto; color:#444; box-shadow: 1px 2px 20px 5px rgba(0,0,0,0.5); }
-div#content-right  { float: right; width:70%; height:auto; overflow:auto; padding: 30px 0 0 20px;
-                     background-color: #eee; border-radius: 5px; }
-div#content-right-top    { width:90%; padding: 30px; height:200px; background-color: #ddd; border-radius: 5px;
+                    padding: 30px 15px 30px 30px; height: 1240px; color:#444; box-shadow: 1px 2px 20px 5px rgba(0,0,0,0.5); }
+div#content-right  { float: right; width:70%; height:1240px; overflow:auto; padding: 30px 0 0 20px;
+                     background-color: #eee; }
+div#content-right-top    { width:90%; padding: 30px; height:auto; background-color: #ddd; border-radius: 5px;
                            box-shadow: 1px 2px 20px 5px rgba(0,0,0,0.5); }
-div#content-right-bottom { width:90%; padding: 30px; margin-top:30px; padding-bottom: 30px; height:400px; 
+div#content-right-bottom { width:90%; padding: 30px; margin-top:30px; height:auto; 
                            background-color: #ddd; border-radius: 5px; box-shadow: 1px 2px 20px 5px rgba(0,0,0,0.5);}
 
 #last-tweet        { font-size: 2em; color: #222; letter-spacing: 1.5px; line-height: 1.1em; }
