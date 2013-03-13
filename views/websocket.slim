@@ -27,8 +27,9 @@ javascript:
         .append('<td>'+tweet.text+'</td></tr>');
       
       // make div scrollable if extend height
-      //var div = $('#content-right-bottom');
+      //var div = $('#content-right-bottom'),
       //height = div.height();
+
       
       $('#previous-tweets tbody').prepend('<tr><td><img src="'+tweet.user["profile_image_url"]+'"/></td>' +
         '<td>'+tweet.user["name"]+'</td>' +
@@ -38,16 +39,8 @@ javascript:
       //$("#previous-tweets tr:gt(5)").hide(); // hide all after row four
       $("#previous-tweets tr:eq(0)").hide(); // hide first (last tweet)
       $("#previous-tweets tr:eq(1)").show(); // show first (last tweet)
-      
-      $("#previous-tweets").fixedHeaderTable({ height: 400 });        
-      $("#previous-tweets").simplyScroll({
-          orientation: 'vertical',
-          autoMode: 'loop'
-        });
-
-      // autoscroll if tweets extend page  
-      //div.animate({scrollTop: height}, 500);
-      //height += div.height();
+                        
+      animate_archive();
     }
   
     ws.onclose = function() {
