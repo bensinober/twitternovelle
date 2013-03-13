@@ -76,7 +76,7 @@ class Twitternovelle < Sinatra::Base
         end
       end
     else
-      @session[:client].userstream {|status| EM.next_tick { settings.sockets.each { |s| s.send(status.to_hash.to_json) } } }
+      #@session[:client].userstream {|status| EM.next_tick { settings.sockets.each { |s| s.send(status.to_hash.to_json) } } }
     end
     logger.info "started stream: #{@session[:client].stream.inspect}"
     @session[:client].stream

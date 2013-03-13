@@ -22,7 +22,6 @@ div id="container"
         div 
           p siste fem
           table id="previous-tweets"
-            tbody
             - unless tweets.empty?
               // take the second last and 5 more 
               - tweets.reverse[1..5].each do |tweet|
@@ -34,7 +33,7 @@ div id="container"
             - else
               tr
     div id="content-left"
-          h2 Info om prosjektet
+          h2 Om tevlinga
           hr
           p Nynorsk i 140 er ei Twitter-tevling i samband med Språkåret 2013.
             Tevlinga er arrangert av Deichmanske bibliotek med stønad frå Fritt ord.
@@ -42,11 +41,14 @@ div id="container"
           br
 
           p Vi inviterer til seks tevlingar med seks ulike tema i løpet av året. Alle bidrag må innehalde tema-ordet, 
-            hashtagen #nynov og vere skrivne på nynorsk. Tekstar kan komme i form av dikt, noveller eller for den saks skuld,
+            emneknaggen <a href="#nynov">#nynov</a> og vere skrivne på nynorsk. Tekstar kan komme i form av dikt, noveller eller for den saks skuld,
             korte avhandlingar. 
           br
 
-          p Månadens tema er: #{track_terms}
+          p Tema i mars(15.mars-3.apri) er VÅR
+          br
+          p I juryen finn du <a href="@KristineTofte">@KristineTofte</a>, <a href="@Kvalshaug">@Kvalshaug</a>, <a href="@SvevePer">@SvevePer</a>, 
+          <a href="@oddvarthorsen">@oddvarthorsen</a> og <a href="@cathrine_s">@cathrine_s</a>
           //br
           //form action="/" method="POST" id="search_form"
           //  ul class="inline"
