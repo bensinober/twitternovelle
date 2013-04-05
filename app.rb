@@ -2,6 +2,7 @@
 $stdout.sync = true # gives foreman full stdout
 
 require "rubygems"
+require "yaml"
 require "bundler/setup"
 require "sinatra/base"
 require "sinatra-websocket"
@@ -30,6 +31,7 @@ class Twitternovelle < Sinatra::Base
   
   CONFIG = YAML::load(File.open("config/config.yml"))
   TWEETS = File.join(File.dirname(__FILE__), 'logs/', 'tweets.json')
+  VAAREN = File.join(File.dirname(__FILE__), 'logs/', 'vaaren.json')
   
   # Twitter API config
   TweetStream.configure do |config|
@@ -107,7 +109,13 @@ class Twitternovelle < Sinatra::Base
   end
   
   get '/vertical' do
-      slim :vertical, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => @session[:tweets]}
+    slim :vertical, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => @session[:tweets]}
+  end
+  
+  get '/tevling' do
+    hash = JSON.parse(IO.read(VAAREN))
+    puts hash["tweets"]
+    slim :tevling, :locals => {:tweets => hash["tweets"] } 
   end
   
   post '/track' do

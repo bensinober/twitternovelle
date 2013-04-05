@@ -1,0 +1,35 @@
+== render :slim, :'header'
+
+div id="container"
+  div id="contents"
+    
+    div id="content-right"
+      div id="content-right-top"
+        h3 Tema: Vår
+        p antall tweets: #{tweets.count}
+      div id="content-right-bottom"
+        div 
+          table id="previous-tweets"
+            - tweets.each do |tweet|
+              tr
+                //td: img[src=(tweet["user"]["profile_image_url"] if tweet["user"] )] 
+                td
+                  p[style="font-size: 0.7em"] @#{tweet["user"]["screen_name"] if tweet["user"]} 
+                //td
+                  p[style="font-size: 0.7em"] #{tweet["user"]["name"] if tweet["user"]} 
+                td 
+                  p[style="font-size: 0.7em"] #{tweet["text"] if tweet["text"]}
+    div id="content-left"
+          h2 Om tevlinga
+          hr
+          p Nynorsk i 140 er ei Twitter-tevling i samband med Språkåret 2013.
+            Tevlinga er arrangert av Deichmanske bibliotek med stønad frå Fritt ord.
+          
+          br
+
+          p Vi inviterer til seks tevlingar med seks ulike tema i løpet av året. Alle bidrag må innehalde tema-ordet, 
+            emneknaggen <a href="https://twitter.com/search?q=%23nynov&src=hash">#nynov</a> og vere skrivne på nynorsk. Tekstar kan komme i form av dikt, noveller eller for den saks skuld,
+            korte avhandlingar. 
+          br
+          p I juryen finn du <a href="https://twitter.com/kristinetofte">@KristineTofte</a>, <a href="https://twitter.com/Kvalshaug">@Kvalshaug</a>, <a href="https://twitter.com/SvevePer">@SvevePer</a>, 
+          <a href="https://twitter.com/oddvarthorsen">@oddvarthorsen</a> og <a href="https://twitter.com/cathrine_s">@cathrine_s</a>

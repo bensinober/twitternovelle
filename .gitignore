@@ -1,4 +1,4 @@
 Capfile
-logs/*
+logs/*.log
 config/config.yml
 config/deploy.rb
