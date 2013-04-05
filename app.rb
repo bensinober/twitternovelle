@@ -105,6 +105,11 @@ class Twitternovelle < Sinatra::Base
   
   # Routes
   get '/' do
+    # load from file if session restarted
+    if @session[:tweets].empty? 
+      hash = JSON.parse(IO.read(VAAREN))
+      @session[:tweets] = hash["tweets"]
+    end
     slim :index, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => @session[:tweets]}
   end
   
