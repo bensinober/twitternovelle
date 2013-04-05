@@ -10,9 +10,11 @@ div id="container"
       div id="content-right-bottom"
         div 
           table id="previous-tweets"
-            - tweets.each do |tweet|
+            - tweets.each_with_index do |tweet, i|
               tr
                 //td: img[src=(tweet["user"]["profile_image_url"] if tweet["user"] )] 
+                td 
+                  p[style="font-size: 0.7em"] #{i}
                 td
                   p[style="font-size: 0.7em"] @#{tweet["user"]["screen_name"] if tweet["user"]} 
                 //td
