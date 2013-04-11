@@ -48,7 +48,7 @@ class Twitternovelle < Sinatra::Base
     @session = {}
     # to be used later for logging
     @session[:tweets] = []
-    @session[:track_terms] = ""
+    @session[:track_terms] = "oslo"
     
     # open Twitter client connection
     @session[:client] = TweetStream::Client.new
@@ -65,7 +65,7 @@ class Twitternovelle < Sinatra::Base
   def start_stream(track_terms=nil)
     # start userstream
     @session[:client].on_error {|error| logger.error("error: #{error.text}") }
-    @session[:client].on_direct_message {|direct_message| logger.info("direct message: #{direct_message.text}") }
+    #@session[:client].on_direct_message {|direct_message| logger.info("direct message: #{direct_message.text}") }
     #@client.on_timeline_status {|status| logger.info("timelinestatus: #{status.text}") }
     # unless session[:track_terms] is set
     if track_terms
@@ -73,11 +73,14 @@ class Twitternovelle < Sinatra::Base
       @session[:track_terms] = track_terms.split(' ').join(',')
       @session[:client].track(@session[:track_terms]) do |status| 
         EM.next_tick do
-          settings.sockets.each { |s| s.send(status.to_hash.to_json) } 
-          save_tweet(JSON.parse(status.to_hash.to_json))
+          unless status.to_hash[:text] =~ /^RT/ # filter out retweets
+            settings.sockets.each { |s| s.send(status.to_hash.to_json) }
+            save_tweet(JSON.parse(status.to_hash.to_json))
+          end
         end
       end
     else
+      #show userstream
       #@session[:client].userstream {|status| EM.next_tick { settings.sockets.each { |s| s.send(status.to_hash.to_json) } } }
     end
     logger.info "started stream: #{@session[:client].stream.inspect}"
