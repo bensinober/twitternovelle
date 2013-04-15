@@ -52,6 +52,7 @@ class Twitternovelle < Sinatra::Base
     
     # open Twitter client connection
     @session[:client] = TweetStream::Client.new
+    @session[:client].on_inited { @session[:stream] = start_stream(@session[:track_terms]) }
     #ping testing...
     #EM::next_tick do
     #  EM::add_periodic_timer(1) do
@@ -65,6 +66,7 @@ class Twitternovelle < Sinatra::Base
   def start_stream(track_terms=nil)
     # start userstream
     @session[:client].on_error {|error| logger.error("error: #{error.text}") }
+    @session[:client].on_reconnect {|timeout, retries| logger.error("reconnect error: timeout: #{timeout}, retries: #{retries}") }
     #@session[:client].on_direct_message {|direct_message| logger.info("direct message: #{direct_message.text}") }
     #@client.on_timeline_status {|status| logger.info("timelinestatus: #{status.text}") }
     # unless session[:track_terms] is set
@@ -73,7 +75,7 @@ class Twitternovelle < Sinatra::Base
       @session[:track_terms] = track_terms.split(' ').join(',')
       @session[:client].track(@session[:track_terms]) do |status| 
         EM.next_tick do
-          unless status.to_hash[:text] =~ /^RT/ # filter out retweets
+          unless status.to_hash[:text] =~ /^RT/ or status.to_hash[:text] =~ /^\@/ # filter out retweets 
             settings.sockets.each { |s| s.send(status.to_hash.to_json) }
             save_tweet(JSON.parse(status.to_hash.to_json))
           end
@@ -127,6 +129,7 @@ class Twitternovelle < Sinatra::Base
   end
   
   post '/track' do
+    # restart stream with new track terms
     if params[:track_terms]
       @session[:stream].stop if @session[:stream] # close running stream
       

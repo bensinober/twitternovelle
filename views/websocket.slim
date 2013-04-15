@@ -45,6 +45,10 @@ javascript:
   
     ws.onclose = function() {
       console.log("Websocket connection lost!");
+      console.log("Refreshing page in 15 seconds!");
+      setTimeout(function(){
+        window.location.reload(true)
+        }, 15000);
     }
   
     ws.onopen = function() {
