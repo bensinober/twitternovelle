@@ -46,13 +46,19 @@ class Twitternovelle < Sinatra::Base
   def initialize
     super
     @session = {}
-    # to be used later for logging
-    @session[:tweets] = []
-    @session[:track_terms] = "oslo"
+    # default track terms
+    @session[:track_terms] = "#nynov"
+    @session[:tweets]      = []
+    # create tweet file if not exists
+    File.open(TWEETS, 'w') {|f| f.write(JSON.pretty_generate(JSON.parse({"tweets"=>[]}.to_json)))} unless File.exist?(TWEETS)
     
+    # load tweets from file if session restarted
+    hash = JSON.parse(IO.read(TWEETS))
+    hash["tweets"].each {|tweet| @session[:tweets] << tweet }
+
     # open Twitter client connection
     @session[:client] = TweetStream::Client.new
-    @session[:client].on_inited { @session[:stream] = start_stream(@session[:track_terms]) }
+    #@session[:client].on_inited { @session[:stream] = start_stream(@session[:track_terms]) }
     #ping testing...
     #EM::next_tick do
     #  EM::add_periodic_timer(1) do
@@ -93,9 +99,6 @@ class Twitternovelle < Sinatra::Base
     tweet = status.to_hash.select { |k,v| ["created_at", "text", "geo", "coordinates", "place", "user"].include?(k) }
     tweet['user'] = tweet['user'].select { |k,v| ["id", "name", "screen_name", "location", "description", "geo_enabled", "statuses_count", "lang", "profile_image_url"].include?(k) }
     
-    unless File.exist?(TWEETS)
-      File.open(TWEETS, 'w') {|f| f.write(JSON.pretty_generate(JSON.parse({"tweets"=>[]}.to_json)))}
-    end
     puts tweet
     file = JSON.parse(IO.read(TWEETS))
     file['tweets'] << tweet
@@ -110,11 +113,6 @@ class Twitternovelle < Sinatra::Base
   
   # Routes
   get '/' do
-    # load from file if session restarted
-    if @session[:tweets].empty? 
-      hash = JSON.parse(IO.read(VAAREN))
-      @session[:tweets] = hash["tweets"]
-    end
     slim :index, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => @session[:tweets]}
   end
   
@@ -143,16 +141,16 @@ class Twitternovelle < Sinatra::Base
     end
   end
 
-  get '/stop' do
+  put '/stop' do
     # stop tweetstream
-    session[:stream].stop
-    "stopp saligheita!"
+    @session[:stream].stop
+    "stoppa saligheita!"
   end
 
-  get '/start' do
+  put '/start' do
     # start tweetstream
-    session[:stream] = start_stream
-    "start saligheita!"
+    @session[:stream] = start_stream(@session[:track_terms])
+    "starta saligheita!"
   end
   
   # sinatra websocket server

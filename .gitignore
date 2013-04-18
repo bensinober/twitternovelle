@@ -1,4 +1,5 @@
 Capfile
 logs/*.log
+logs/tweets.json
 config/config.yml
 config/deploy.rb
