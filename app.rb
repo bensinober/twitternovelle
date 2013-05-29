@@ -32,6 +32,7 @@ class Twitternovelle < Sinatra::Base
   CONFIG = YAML::load(File.open("config/config.yml"))
   TWEETS = File.join(File.dirname(__FILE__), 'logs/', 'tweets.json')
   VAAREN = File.join(File.dirname(__FILE__), 'logs/', 'vaaren.json')
+  LYST   = File.join(File.dirname(__FILE__), 'logs/', 'lyst.json')
   
   # Twitter API config
   TweetStream.configure do |config|
@@ -121,8 +122,8 @@ class Twitternovelle < Sinatra::Base
   end
   
   get '/tevling' do
-    hash = JSON.parse(IO.read(VAAREN))
-    puts hash["tweets"]
+    hash = JSON.parse(IO.read(LYST))
+    #puts hash["tweets"]
     slim :tevling, :locals => {:tweets => hash["tweets"] } 
   end
   
