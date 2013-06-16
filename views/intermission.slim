@@ -1,0 +1,54 @@
+== render :slim, :'verticalheader'
+
+div id="container"
+  div id="contents"
+
+    div id="content-top"
+      h2 Om tevlinga
+      hr
+        p Nynorsk i 140 er ei Twitter-tevling i samband med Språkåret 2013.
+          Tevlinga er arrangert av Deichmanske bibliotek med stønad frå Fritt ord.
+        
+        p Deichmanske bibliotek inviterer til seks skrivetevlingar på Twitter i samband med Språkåret 2013. Alle bidrag må vere knytt til temaet,
+          innehalde emneknaggen <a href="https://twitter.com/search?q=%23nynov&src=hash">#nynov</a> og vere skrivne på nynorsk. 
+        br
+      p I juryen finn du <a href="https://twitter.com/kristinetofte">@KristineTofte</a>, <a href="https://twitter.com/Kvalshaug">@Kvalshaug</a>, <a href="https://twitter.com/SvevePer">@SvevePer</a>, 
+          <a href="https://twitter.com/oddvarthorsen">@oddvarthorsen</a> og <a href="https://twitter.com/cathrine_s">@cathrine_s</a> 
+      
+    h2[style="margin-left:48px;" id="theme"]
+    div id="content-middle"
+      div
+        table id="last-tweet"
+          tbody
+            tr
+
+  javascript:
+    $(document).ready(function () {
+      ws = new WebSocket("ws://#{websocket['host']}:#{websocket['port']}/ws");
+      // local var 'ws' not prefixed by var to be accessible outside function
+
+      ws.onmessage = function(evt) {
+        console.log("Message received: "+evt.data);
+        var tweet = JSON.parse(evt.data);
+        $.each(tweet, function(k,v) {
+          $('#theme').text('Tema: '+k);
+          $('#last-tweet tbody').html('<tr><td><img src="'+v["user"]["profile_image_url"]+'"/></td>')
+            .append('<td>'+v["user"]["name"]+'</td>')
+            .append('<td colspan="4">&nbsp;:&nbsp;</td>')
+            .append('<td>'+v["text"]+'</td></tr>');
+        });
+      }
+    
+      ws.onclose = function() {
+        console.log("Websocket connection lost!");
+        console.log("Refreshing page in 15 seconds!");
+        setTimeout(function(){
+          window.location.reload(true)
+          }, 15000);
+      }
+    
+      ws.onopen = function() {
+        console.log("Websocket connected!");
+      }
+    })
+        

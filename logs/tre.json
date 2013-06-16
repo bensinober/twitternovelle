@@ -1,96 +1,6 @@
 {
   "tweets": [
     {
-      "created_at": "Thu May 23 17:55:13 +0000 2013",
-      "text": "Godtfolk! I morgon ettermiddag: ny runde, nytt temaord, nye tweetar, nye sjansar. Nynorsk i 140! #nynov Gled dykk! RT gjerne",
-      "user": {
-        "id": 1100486671,
-        "name": "Nynorsk i 140",
-        "screen_name": "nynov140",
-        "location": "",
-        "description": "Nynorsk i 140 er ei Twitter-tevling i samband med Språkåret 2013.\r\n\r\nTema i april er LYST, bruk emneknaggen #NYNOV",
-        "geo_enabled": false,
-        "statuses_count": 35,
-        "lang": "no",
-        "profile_image_url": "http://a0.twimg.com/profile_images/3382776162/82354646ce2b82d7e094f139ce9f1dc9_normal.jpeg"
-      },
-      "geo": null,
-      "coordinates": null,
-      "place": null
-    },
-    {
-      "created_at": "Thu May 23 18:08:23 +0000 2013",
-      "text": "No skjer det noko, #nynov er i 140 att! Følg @nynov140, so får du også ta del! Frå i morgon ny runde i den gjeve twitternovelletevlinga!",
-      "user": {
-        "id": 217591406,
-        "name": "Per Roger Sandvik",
-        "screen_name": "SvevePer",
-        "location": "Fjellstrand",
-        "description": "diktogslikt",
-        "geo_enabled": false,
-        "statuses_count": 15135,
-        "lang": "no",
-        "profile_image_url": "http://a0.twimg.com/profile_images/1172999847/Ymse_039_normal.jpg"
-      },
-      "geo": null,
-      "coordinates": null,
-      "place": null
-    },
-    {
-      "created_at": "Fri May 24 11:51:36 +0000 2013",
-      "text": "PANG!! Ny runde i twittertevlinga ’Nynorsk i 140!’ startar NO! Temaordet denne gongen er ’TRE’. Hugs å emneknagge alle dine bidrag #nynov",
-      "user": {
-        "id": 1100486671,
-        "name": "Nynorsk i 140",
-        "screen_name": "nynov140",
-        "location": "",
-        "description": "Nynorsk i 140 er ei Twitter-tevling i samband med Språkåret 2013.\r\n\r\nTema i april er LYST, bruk emneknaggen #NYNOV",
-        "geo_enabled": false,
-        "statuses_count": 37,
-        "lang": "no",
-        "profile_image_url": "http://a0.twimg.com/profile_images/3382776162/82354646ce2b82d7e094f139ce9f1dc9_normal.jpeg"
-      },
-      "geo": null,
-      "coordinates": null,
-      "place": null
-    },
-    {
-      "created_at": "Fri May 24 11:52:13 +0000 2013",
-      "text": "Kva #nynov er finn du ut av her http://t.co/hKmh5XVhta og her http://t.co/5BpdJvx6T2\nNB! Rundens tema er ’tre’. Hugs emneknaggen #nynov",
-      "user": {
-        "id": 1100486671,
-        "name": "Nynorsk i 140",
-        "screen_name": "nynov140",
-        "location": "",
-        "description": "Nynorsk i 140 er ei Twitter-tevling i samband med Språkåret 2013.\r\n\r\nTema i april er LYST, bruk emneknaggen #NYNOV",
-        "geo_enabled": false,
-        "statuses_count": 38,
-        "lang": "no",
-        "profile_image_url": "http://a0.twimg.com/profile_images/3382776162/82354646ce2b82d7e094f139ce9f1dc9_normal.jpeg"
-      },
-      "geo": null,
-      "coordinates": null,
-      "place": null
-    },
-    {
-      "created_at": "Fri May 24 11:53:13 +0000 2013",
-      "text": "Temaordet ’tre’ er meint som retningsord, noko som kan setje deg på sporet av fleire gode ord. Du kan bruke alle tydingar av det. #nynov",
-      "user": {
-        "id": 1100486671,
-        "name": "Nynorsk i 140",
-        "screen_name": "nynov140",
-        "location": "",
-        "description": "Nynorsk i 140 er ei Twitter-tevling i samband med Språkåret 2013.\r\n\r\nTema i april er LYST, bruk emneknaggen #NYNOV",
-        "geo_enabled": false,
-        "statuses_count": 39,
-        "lang": "no",
-        "profile_image_url": "http://a0.twimg.com/profile_images/3382776162/82354646ce2b82d7e094f139ce9f1dc9_normal.jpeg"
-      },
-      "geo": null,
-      "coordinates": null,
-      "place": null
-    },
-    {
       "created_at": "Fri May 24 11:54:08 +0000 2013",
       "text": "Ein plus ein blir tre #nynov",
       "user": {
@@ -103,78 +13,6 @@
         "statuses_count": 8714,
         "lang": "no",
         "profile_image_url": "http://a0.twimg.com/profile_images/3124821918/2748e669e664b8d31063140c5570db02_normal.jpeg"
-      },
-      "geo": null,
-      "coordinates": null,
-      "place": null
-    },
-    {
-      "created_at": "Fri May 24 11:54:44 +0000 2013",
-      "text": "Du er ikkje nøydd til å ha temaordet med i tweetane dine, men bruk det gjerne som inspirasjon og assosiasjonsflamme. #nynov SKRIV!",
-      "user": {
-        "id": 1100486671,
-        "name": "Nynorsk i 140",
-        "screen_name": "nynov140",
-        "location": "",
-        "description": "Nynorsk i 140 er ei Twitter-tevling i samband med Språkåret 2013.\r\n\r\nTema i april er LYST, bruk emneknaggen #NYNOV",
-        "geo_enabled": false,
-        "statuses_count": 39,
-        "lang": "no",
-        "profile_image_url": "http://a0.twimg.com/profile_images/3382776162/82354646ce2b82d7e094f139ce9f1dc9_normal.jpeg"
-      },
-      "geo": null,
-      "coordinates": null,
-      "place": null
-    },
-    {
-      "created_at": "Fri May 24 11:55:34 +0000 2013",
-      "text": "Til inspirasjon: ordet TRE: http://t.co/ro0jkJr2QF #mangetydande #nynov",
-      "user": {
-        "id": 1100486671,
-        "name": "Nynorsk i 140",
-        "screen_name": "nynov140",
-        "location": "",
-        "description": "Nynorsk i 140 er ei Twitter-tevling i samband med Språkåret 2013.\r\n\r\nTema i april er LYST, bruk emneknaggen #NYNOV",
-        "geo_enabled": false,
-        "statuses_count": 41,
-        "lang": "no",
-        "profile_image_url": "http://a0.twimg.com/profile_images/3382776162/82354646ce2b82d7e094f139ce9f1dc9_normal.jpeg"
-      },
-      "geo": null,
-      "coordinates": null,
-      "place": null
-    },
-    {
-      "created_at": "Fri May 24 11:56:34 +0000 2013",
-      "text": "Denne runden varer heilt til søndag 8. juni. Det gir deg tid til å tenkje ut tidenes nynorsktweet, eller novelle om du vil. SKRIV! #nynov",
-      "user": {
-        "id": 1100486671,
-        "name": "Nynorsk i 140",
-        "screen_name": "nynov140",
-        "location": "",
-        "description": "Nynorsk i 140 er ei Twitter-tevling i samband med Språkåret 2013.\r\n\r\nTema i april er LYST, bruk emneknaggen #NYNOV",
-        "geo_enabled": false,
-        "statuses_count": 42,
-        "lang": "no",
-        "profile_image_url": "http://a0.twimg.com/profile_images/3382776162/82354646ce2b82d7e094f139ce9f1dc9_normal.jpeg"
-      },
-      "geo": null,
-      "coordinates": null,
-      "place": null
-    },
-    {
-      "created_at": "Fri May 24 11:58:53 +0000 2013",
-      "text": "Er du i gang? Fint! #SKRIV #nynov Sprei gjerne den glade bodskapen om at runde tre av twitternovelletevlinga 'Nynorsk i 140!' er i gang!",
-      "user": {
-        "id": 1100486671,
-        "name": "Nynorsk i 140",
-        "screen_name": "nynov140",
-        "location": "",
-        "description": "Nynorsk i 140 er ei Twitter-tevling i samband med Språkåret 2013.\r\n\r\nTema i april er LYST, bruk emneknaggen #NYNOV",
-        "geo_enabled": false,
-        "statuses_count": 43,
-        "lang": "no",
-        "profile_image_url": "http://a0.twimg.com/profile_images/3382776162/82354646ce2b82d7e094f139ce9f1dc9_normal.jpeg"
       },
       "geo": null,
       "coordinates": null,
@@ -545,24 +383,6 @@
         "statuses_count": 1062,
         "lang": "en",
         "profile_image_url": "http://a0.twimg.com/profile_images/3107931674/0f78c6268ab92591aed89e63a7687816_normal.jpeg"
-      },
-      "geo": null,
-      "coordinates": null,
-      "place": null
-    },
-    {
-      "created_at": "Fri May 24 18:03:44 +0000 2013",
-      "text": "3. runde i den store twitternovellekonkurransen 'Nynorsk i 140!' er i gang! Følg med og bruk hashtaggen #nynov. Regi: Deichmanske bibliotek.",
-      "user": {
-        "id": 26977269,
-        "name": "Deichmanske",
-        "screen_name": "deichmanske",
-        "location": "Oslo",
-        "description": "Deichmanske bibliotek - Oslo Public Library",
-        "geo_enabled": false,
-        "statuses_count": 6307,
-        "lang": "en",
-        "profile_image_url": "http://a0.twimg.com/profile_images/1460037757/deichman_avatar_normal.jpg"
       },
       "geo": null,
       "coordinates": null,
@@ -3279,24 +3099,6 @@
       "place": null
     },
     {
-      "created_at": "Tue May 28 15:32:30 +0000 2013",
-      "text": "#nynov-inspirasjonsordet TRE kan tyde så mangt: http://t.co/Yxwasl20jl",
-      "user": {
-        "id": 889405104,
-        "name": "Deichman Bøler",
-        "screen_name": "DeichmanBoler",
-        "location": "",
-        "description": null,
-        "geo_enabled": false,
-        "statuses_count": 107,
-        "lang": "no",
-        "profile_image_url": "http://a0.twimg.com/profile_images/2734331695/dd428a7a2b88ce629353992c206a550c_normal.jpeg"
-      },
-      "geo": null,
-      "coordinates": null,
-      "place": null
-    },
-    {
       "created_at": "Tue May 28 16:25:24 +0000 2013",
       "text": "Dei bytta på \nkven som fekk gå \ni midten \nI dag var det ho \nstille glede i tre\n#nynov",
       "user": {
@@ -4047,24 +3849,6 @@
         "statuses_count": 8857,
         "lang": "no",
         "profile_image_url": "http://a0.twimg.com/profile_images/3124821918/2748e669e664b8d31063140c5570db02_normal.jpeg"
-      },
-      "geo": null,
-      "coordinates": null,
-      "place": null
-    },
-    {
-      "created_at": "Wed May 29 08:32:33 +0000 2013",
-      "text": "Twitternovelletevlinga \"Nynorsk i 140!\" er i fløymande framskrid! Følg @nynov140 og http://t.co/5JeUcL1jtb Delta du også! #nynov",
-      "user": {
-        "id": 26977269,
-        "name": "Deichmanske",
-        "screen_name": "deichmanske",
-        "location": "Oslo",
-        "description": "Deichmanske bibliotek - Oslo Public Library",
-        "geo_enabled": false,
-        "statuses_count": 6309,
-        "lang": "en",
-        "profile_image_url": "http://a0.twimg.com/profile_images/1460037757/deichman_avatar_normal.jpg"
       },
       "geo": null,
       "coordinates": null,
@@ -7284,24 +7068,6 @@
       "place": null
     },
     {
-      "created_at": "Wed Jun 05 10:17:54 +0000 2013",
-      "text": "#nynov på skjermar \"library wide\", her frå Deichmanske sitt hovudbibliotek i hovudstaden @nynov140 http://t.co/E6Is4sHfar",
-      "user": {
-        "id": 217591406,
-        "name": "Per Roger Sandvik",
-        "screen_name": "SvevePer",
-        "location": "Fjellstrand",
-        "description": "diktogslikt",
-        "geo_enabled": false,
-        "statuses_count": 15340,
-        "lang": "no",
-        "profile_image_url": "http://a0.twimg.com/profile_images/1172999847/Ymse_039_normal.jpg"
-      },
-      "geo": null,
-      "coordinates": null,
-      "place": null
-    },
-    {
       "created_at": "Wed Jun 05 18:25:36 +0000 2013",
       "text": "Vi har for lengst runda 1000 (tusen) unike bidrag i twitternovelletevlinga 'Nynorsk i 140'! Det er ein sann fryd! Stå på! Skriv #nynov",
       "user": {
@@ -9367,23 +9133,6 @@
     "place": null
   },
   {
-    "created_at": "2013-06-09T13:20:28+00:00",
-    "text": "RT @SvevePer: NB! Siste helga i twittertevlinga 'Nynorsk i 140!', 3. runde. Emneordet er TRE, bruk emneknaggen #nynov. Skriv som galningar!…",
-    "user": {
-      "id": null,
-      "name": "schousplass (Deichman Grünerløkka)",
-      "screen_name": "http://twitter.com/schousplass",
-      "description": null,
-      "geo_enabled": null,
-      "statuses_count": null,
-      "lang": "no",
-      "profile_image_url": "http://a0.twimg.com/profile_images/1563736869/Schous_plass__twitter_lite_normal.jpg"
-    },
-    "geo": null,
-    "coordinates": null,
-    "place": null
-  },
-  {
     "created_at": "2013-06-09T13:36:08+00:00",
     "text": "Avskjed, sakn, sakn. Usnakka ugjort, farvel. Deg. Eg. Ingenting. #nynov",
     "user": {
@@ -9924,24 +9673,6 @@
         "statuses_count": 165,
         "lang": "en",
         "profile_image_url": "http://a0.twimg.com/profile_images/3755460870/ac071243088d1303ce54655cd9c1f30a_normal.jpeg"
-      },
-      "geo": null,
-      "coordinates": null,
-      "place": null
-    },
-    {
-      "created_at": "Sun Jun 09 18:02:23 +0000 2013",
-      "text": "Siste nytt fra den nynorske twitternovellekonkurransen 'Nynorsk i 140!' får du ved å følge @nynov140 og taggen #nynov. 3. del ender snart.",
-      "user": {
-        "id": 26977269,
-        "name": "Deichmanske",
-        "screen_name": "deichmanske",
-        "location": "Oslo",
-        "description": "Deichmanske bibliotek - Oslo Public Library",
-        "geo_enabled": false,
-        "statuses_count": 6334,
-        "lang": "en",
-        "profile_image_url": "http://a0.twimg.com/profile_images/1460037757/deichman_avatar_normal.jpg"
       },
       "geo": null,
       "coordinates": null,

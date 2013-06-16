@@ -30,10 +30,14 @@ class Twitternovelle < Sinatra::Base
   end
   
   CONFIG = YAML::load(File.open("config/config.yml"))
-  TWEETS = File.join(File.dirname(__FILE__), 'logs/', 'tweets.json')
-  TRE    = File.join(File.dirname(__FILE__), 'logs/', 'tre.json')
-  VAAREN = File.join(File.dirname(__FILE__), 'logs/', 'vaaren.json')
-  LYST   = File.join(File.dirname(__FILE__), 'logs/', 'lyst.json')
+
+  TWEETS = File.join(File.dirname(__FILE__), 'logs/', 'tweets.json') 
+  TRE    = JSON.parse(IO.read(File.join(File.dirname(__FILE__), 'logs/', 'tre.json') ))
+  VAAREN = JSON.parse(IO.read(File.join(File.dirname(__FILE__), 'logs/', 'vaaren.json') ))
+  LYST   = JSON.parse(IO.read(File.join(File.dirname(__FILE__), 'logs/', 'lyst.json') ))
+  
+  THEMES = [:våren, :lyst, :tre]
+  ALL_TWEETS = { :våren => VAAREN["tweets"], :lyst => LYST["tweets"], :tre => TRE["tweets"] }
   
   # Twitter API config
   TweetStream.configure do |config|
@@ -51,6 +55,10 @@ class Twitternovelle < Sinatra::Base
     # default track terms
     @session[:track_terms] = "#nynov"
     @session[:tweets]      = []
+
+=begin
+    # only used in contest
+    @session[:contest] = true
     # create tweet file if not exists
     File.open(TWEETS, 'w') {|f| f.write(JSON.pretty_generate(JSON.parse({"tweets"=>[]}.to_json)))} unless File.exist?(TWEETS)
     
@@ -61,14 +69,15 @@ class Twitternovelle < Sinatra::Base
     # open Twitter client connection
     @session[:client] = TweetStream::Client.new
     #@session[:client].on_inited { @session[:stream] = start_stream(@session[:track_terms]) }
-    #ping testing...
-    #EM::next_tick do
-    #  EM::add_periodic_timer(1) do
-    #    self.settings.sockets.each do |s|
-    #      s.send("test</br>")
-    #    end
-    #  end
-    #end
+=end
+    #random tweet every 5 secs
+    EM::next_tick do
+      EM::add_periodic_timer(30) do
+        self.settings.sockets.each do |s|
+          s.send(self.random_tweet.to_json)
+        end
+      end
+    end
   end
     
   def start_stream(track_terms=nil)
@@ -107,27 +116,33 @@ class Twitternovelle < Sinatra::Base
     File.open(TWEETS, 'w') {|f| f.write(JSON.pretty_generate(JSON.parse(file.to_json)))}
     @session[:tweets] << tweet
   end
-  #def stop_stream
-  #  logger.info "stopping stream: #{@session[:client].inspect}"
-  #  @session[:client].stop
-  #  #@session[:client] = nil
-  #end
+
+  def random_tweet
+    theme = THEMES.sample
+    sample = { theme => ALL_TWEETS[theme].sample }
+  end
   
   # Routes
   get '/' do
-    slim :index, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => @session[:tweets]}
+    # present contest or intermission based on @session[:contest] switch
+    @session[:contest] ?
+      slim(:index, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => @session[:tweets]}) :
+      slim(:intermission, :locals => {:websocket => CONFIG['websocket']})
   end
   
   get '/vertical' do
-    slim :vertical, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => @session[:tweets]}
+    # present contest or intermission based on @session[:contest] switch
+    @session[:contest] ?
+      slim(:vertical, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => @session[:tweets]}) :
+      slim(:intermission, :locals => {:websocket => CONFIG['websocket']})
   end
   
   get '/tevling' do
-    hash = JSON.parse(IO.read(TRE))
     #puts hash["tweets"]
-    slim :tevling, :locals => {:tweets => hash["tweets"] } 
+    slim :tevling, :locals => {:tweets => TRE["tweets"] } 
   end
   
+  # POST / PUT
   post '/track' do
     # restart stream with new track terms
     if params[:track_terms]
@@ -154,7 +169,17 @@ class Twitternovelle < Sinatra::Base
     @session[:stream] = start_stream(@session[:track_terms])
     "starta saligheita!"
   end
-  
+
+  put '/intermission' do
+    # contest/intermission toggle
+    @session[:contest] ? @session[:contest] = false : @session[:contest] = true
+    if @session[:contest]
+      "contest started"
+    else
+      "contest stopped - intermission started"
+    end
+  end
+    
   # sinatra websocket server
   get '/ws' do
     return false unless request.websocket?
