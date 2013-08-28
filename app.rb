@@ -56,7 +56,7 @@ class Twitternovelle < Sinatra::Base
     @session[:track_terms] = "#nynov"
     @session[:tweets]      = []
 
-=begin
+#=begin
     # only used in contest
     @session[:contest] = true
     # create tweet file if not exists
@@ -69,7 +69,8 @@ class Twitternovelle < Sinatra::Base
     # open Twitter client connection
     @session[:client] = TweetStream::Client.new
     #@session[:client].on_inited { @session[:stream] = start_stream(@session[:track_terms]) }
-=end
+#=end
+=begin
     #random tweet every 5 secs
     EM::next_tick do
       EM::add_periodic_timer(30) do
@@ -78,6 +79,7 @@ class Twitternovelle < Sinatra::Base
         end
       end
     end
+=end
   end
     
   def start_stream(track_terms=nil)
