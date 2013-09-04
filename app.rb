@@ -71,7 +71,7 @@ class Twitternovelle < Sinatra::Base
     #@session[:client].on_inited { @session[:stream] = start_stream(@session[:track_terms]) }
 #=end
 =begin
-    #random tweet every 5 secs
+    #random tweet every 30 secs
     EM::next_tick do
       EM::add_periodic_timer(30) do
         self.settings.sockets.each do |s|
@@ -79,6 +79,7 @@ class Twitternovelle < Sinatra::Base
         end
       end
     end
+
 =end
   end
     
@@ -117,13 +118,13 @@ class Twitternovelle < Sinatra::Base
     file['tweets'] << tweet
     File.open(TWEETS, 'w') {|f| f.write(JSON.pretty_generate(JSON.parse(file.to_json)))}
     @session[:tweets] << tweet
-  end
-
+  end  
+  
   def random_tweet
     theme = THEMES.sample
     sample = { theme => ALL_TWEETS[theme].sample }
   end
-  
+
   # Routes
   get '/' do
     # present contest or intermission based on @session[:contest] switch
