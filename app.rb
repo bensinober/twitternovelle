@@ -95,7 +95,7 @@ class Twitternovelle < Sinatra::Base
       @session[:track_terms] = track_terms.split(' ').join(',')
       @session[:client].track(@session[:track_terms]) do |status| 
         EM.next_tick do
-          unless status.to_hash[:text] =~ /^RT/ or status.to_hash[:text] =~ /^\@/ # filter out retweets 
+          unless status.to_hash[:text] =~ /^RT/ # filter out retweets 
             settings.sockets.each { |s| s.send(status.to_hash.to_json) }
             save_tweet(JSON.parse(status.to_hash.to_json))
           end
