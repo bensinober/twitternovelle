@@ -72,6 +72,10 @@ div id="container"
           
   javascript:
     $(document).ready(function () {
+      console.log("Refreshing page in 5 mins!");
+      setTimeout(function(){
+        window.location.reload(true)
+        }, 300000);
       // start websocket automatically on page load
       start_websocket();
       // tweet start/stop hidden if search is active

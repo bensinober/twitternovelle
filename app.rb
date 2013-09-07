@@ -32,6 +32,7 @@ class Twitternovelle < Sinatra::Base
   CONFIG = YAML::load(File.open("config/config.yml"))
 
   TWEETS = File.join(File.dirname(__FILE__), 'logs/', 'tweets.json') 
+  SEARCH = File.join(File.dirname(__FILE__), 'logs/', 'search.json')
   TRE    = JSON.parse(IO.read(File.join(File.dirname(__FILE__), 'logs/', 'tre.json') ))
   VAAREN = JSON.parse(IO.read(File.join(File.dirname(__FILE__), 'logs/', 'vaaren.json') ))
   LYST   = JSON.parse(IO.read(File.join(File.dirname(__FILE__), 'logs/', 'lyst.json') ))
@@ -127,10 +128,17 @@ class Twitternovelle < Sinatra::Base
 
   # Routes
   get '/' do
+=begin
+# deactivated websocket view
     # present contest or intermission based on @session[:contest] switch
     @session[:contest] ?
       slim(:index, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => @session[:tweets]}) :
       slim(:intermission, :locals => {:websocket => CONFIG['websocket']})
+=end
+  # rude import of search
+  
+  file = JSON.parse(IO.read(SEARCH))
+  slim(:index, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => file["tweets"]})
   end
   
   get '/vertical' do
