@@ -143,9 +143,12 @@ class Twitternovelle < Sinatra::Base
   
   get '/vertical' do
     # present contest or intermission based on @session[:contest] switch
-    @session[:contest] ?
-      slim(:vertical, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => @session[:tweets]}) :
-      slim(:intermission, :locals => {:websocket => CONFIG['websocket']})
+    file = JSON.parse(IO.read(SEARCH))
+    slim(:vertical, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => file["tweets"]})
+    
+    #@session[:contest] ?
+    #  slim(:vertical, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => @session[:tweets]}) :
+    #  slim(:intermission, :locals => {:websocket => CONFIG['websocket']})
   end
   
   get '/tevling' do
