@@ -68,10 +68,10 @@ class Twitternovelle < Sinatra::Base
     super
     @session = {}
     # default track terms
-    @session[:track_terms] = "#nynov"
+    @session[:track_terms] = "#ruby"
     #@session[:tweets]      = []
-    @session[:tweets]      = CURRENT || []
-=begin
+    @session[:tweets]      = CURRENT['tweets'] || []
+#=begin
     # only used in contest
     @session[:contest] = true
     # create tweet file if not exists
@@ -84,8 +84,8 @@ class Twitternovelle < Sinatra::Base
     # open Twitter client connection
     @session[:client] = TweetStream::Client.new
     #@session[:client].on_inited { @session[:stream] = start_stream(@session[:track_terms]) }
-=end
-#=begin
+#=end
+=begin
     #random tweet every 30 secs
     EM::next_tick do
       EM::add_periodic_timer(30) do
@@ -95,7 +95,7 @@ class Twitternovelle < Sinatra::Base
       end
     end
 
-#=end
+=end
   end
     
   def start_stream(track_terms=nil)
@@ -142,27 +142,27 @@ class Twitternovelle < Sinatra::Base
 
   # Routes
   get '/' do
-#=begin
+=begin
 # deactivated websocket view
     # present contest or intermission based on @session[:contest] switch
     @session[:contest] ?
       slim(:index, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => @session[:tweets]}) :
       slim(:intermission, :locals => {:websocket => CONFIG['websocket']})
-#=end
+=end
   # rude import of search
   
-  #file = JSON.parse(IO.read(SEARCH))
-  #slim(:index, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => file["tweets"]})
+  file = JSON.parse(IO.read(SEARCH))
+  slim(:index, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => file["tweets"]})
   end
   
   get '/vertical' do
     # present contest or intermission based on @session[:contest] switch
-    #file = JSON.parse(IO.read(SEARCH))
-    #slim(:vertical, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => file["tweets"]})
+    #@session[:contest] ?
+    #  slim(:vertical, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => @session[:tweets]}) :
+    #  slim(:intermission, :locals => {:websocket => CONFIG['websocket']})
     
-    @session[:contest] ?
-      slim(:vertical, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => @session[:tweets]}) :
-      slim(:intermission, :locals => {:websocket => CONFIG['websocket']})
+    file = JSON.parse(IO.read(SEARCH))
+    slim(:vertical, :locals => {:websocket => CONFIG['websocket'], :track_terms => @session[:track_terms], :tweets => file["tweets"]})
   end
   
   get '/tevling' do
